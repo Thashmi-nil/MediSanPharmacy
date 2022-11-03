@@ -35,19 +35,7 @@ class _SignINPageViewState extends State<SignINPageView> {
   Widget build(BuildContext context) {
     SignINPageBloc bloc = BlocProvider.of<SignINPageBloc>(context);
     var body = Scaffold(
-      // appBar: PreferredSize(
-      //   preferredSize: const Size.fromHeight(120),
-      //   child: AuthPageAppBar(
-      //     tap: () {
-      //       Navigator.of(context).push(
-      //         MaterialPageRoute(
-      //           builder: ((context) => SignupPageProvider()),
-      //         ),
-      //       );
-      //     },
-      //     leadingText: 'Sign up',
-      //   ),
-      // ),
+      
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(20.0),
