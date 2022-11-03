@@ -125,19 +125,6 @@ class _SignupPageViewState extends State<SignupPageView> {
       ),
     );
     return Scaffold(
-      // appBar: PreferredSize(
-      //   preferredSize: const Size.fromHeight(120),
-      //   child: AuthPageAppBar(
-      //     tap: () {
-      //       Navigator.of(context).push(
-      //         MaterialPageRoute(
-      //           builder: ((context) => SignINPageProvider()),
-      //         ),
-      //       );
-      //     },
-      //     leadingText: 'Sign in',
-      //   ),
-      // ),
       body: BlocBuilder<SignupPageBloc, SignupPageState>(
         buildWhen: (previous, current) =>
             previous.isLoading != current.isLoading,
