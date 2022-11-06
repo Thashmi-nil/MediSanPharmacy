@@ -2,9 +2,9 @@ import 'package:medisan/styles/color_palette.dart';
 // import 'package:medisan/views/owner/admin_view_feedback_page/admin_view_feedback_page_provider.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import '../../customer/cust_item_search/all_item_search_page_provider.dart';
+import '../../customer/cust_item_search/all_item_search_provider.dart';
 // import '../../customer/cust_help/customer_help_page_provider.dart';
-import '../../customer/cust_order/customer_order_page_provider.dart';
+import '../../customer/cust_order_main/cust_order/cust_order_provider.dart';
 import '../../initials/page_two.dart';
 
 class AdminProfilePageView extends StatefulWidget {
@@ -18,6 +18,25 @@ class _AdminProfilePageViewState extends State<AdminProfilePageView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: PreferredSize(
+        preferredSize: const Size.fromHeight(90),
+        child: Padding(
+          padding: const EdgeInsets.only(
+              left: 20.0, right: 20.0, top: 40.0, bottom: 20.0),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              InkWell(
+                onTap: () {
+                  Navigator.of(context).pop();
+                },
+                child: const Icon(Icons.arrow_back_ios),
+              ),
+              const Text('My Account')
+            ],
+          ),
+        ),
+      ),
       body: SingleChildScrollView(
         child: Column(
           children: [
@@ -32,7 +51,7 @@ class _AdminProfilePageViewState extends State<AdminProfilePageView> {
                   Positioned(
                     child: Container(
                       height: 180.0,
-                      color: CustomColors.PRIMARY,
+                      // color: CustomColors.PRIMARY,
                     ),
                   ),
                   Positioned(
@@ -53,10 +72,10 @@ class _AdminProfilePageViewState extends State<AdminProfilePageView> {
                             height: 10.0,
                           ),
                           Text(
-                            'admin@gmail.com',
+                            'adminowner@gmail.com',
                             style:
                                 Theme.of(context).textTheme.headline3!.copyWith(
-                                      color: CustomColors.BACKGROUND,
+                                      color: CustomColors.PRIMARY,
                                     ),
                           ),
                         ],
@@ -66,6 +85,7 @@ class _AdminProfilePageViewState extends State<AdminProfilePageView> {
                 ],
               ),
             ),
+            const Divider(),
             SizedBox(
               height: 600.0,
               child: ListView(
@@ -91,7 +111,7 @@ class _AdminProfilePageViewState extends State<AdminProfilePageView> {
                         Navigator.of(context).push(
                           MaterialPageRoute(
                             builder: ((context) => AllItemSearchPageProvider(
-                                  category: "ALL",
+                                  productType: "ALL",
                                   mode: 'admin',
                                 )),
                           ),
@@ -130,9 +150,14 @@ class _AdminProfilePageViewState extends State<AdminProfilePageView> {
                       },
                       leading: const Icon(
                         Icons.logout_rounded,
-                        color: CustomColors.PRIMARY,
+                        color: CustomColors.ERROR,
                       ),
-                      title: const Text('Log Out'),
+                      title: const Text(
+                        'Log Out',
+                        style: TextStyle(
+                            color: CustomColors.ERROR,
+                            fontWeight: FontWeight.bold),
+                      ),
                     ),
                   ],
                 ).toList(),

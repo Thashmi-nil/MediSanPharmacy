@@ -1,6 +1,6 @@
-// ignore_for_file: use_build_context_synchronously
+// METHOD OF ADDING ADDRESS TO THE FIRESTORE DATABASE
 
-import 'package:medisan/views/customer/cust_select_address/customer_select_address_page_provider.dart';
+import 'package:medisan/views/customer/cust_order_main/cust_select_address/cust_address_select_provider.dart';
 import 'package:bloc/bloc.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -17,8 +17,6 @@ class CustomerAddAddressPageBloc
       TextEditingController();
   late TextEditingController cityTextEditingController =
       TextEditingController();
-  late TextEditingController postalCodeTextEditingController =
-      TextEditingController();
   late TextEditingController phoneTextEditingController =
       TextEditingController();
   CustomerAddAddressPageBloc(BuildContext context)
@@ -34,9 +32,8 @@ class CustomerAddAddressPageBloc
           "addressID": uuid.v4(),
           "name": event.name,
           "addressLineOne": event.addressLineOne,
-          "city": event.city,
-          "postalCode": event.postalCode,
-          "phone": event.phone,
+          "addressLineCity": event.addressLineCity,
+          "phoneNumber": event.phoneNumber,
         });
         emit(state.clone(isLoading: false));
         Navigator.of(context).push(

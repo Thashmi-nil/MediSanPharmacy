@@ -20,15 +20,15 @@ class AdminHomePageBloc extends Bloc<AdminHomePageEvent, AdminHomePageState> {
         var querySnapshots = await collection.get();
         for (var snapshot in querySnapshots.docs) {
           ProductModel model = ProductModel(
-              documentID: snapshot.id,
+              docID: snapshot.id,
               userId: snapshot.data()['userID'],
               productId: snapshot.data()['productID'],
               name: snapshot.data()['name'],
-              price: snapshot.data()['price'],
-              quantity: snapshot.data()['quantity'],
-              category: snapshot.data()['category'],
+              productPrice: snapshot.data()['productPrice'],
+              productQuantity: snapshot.data()['productQuantity'],
+              productType: snapshot.data()['productType'],
               imageUrl: snapshot.data()['imageUrl'],
-              description: snapshot.data()['description']);
+              aboutProduct: snapshot.data()['aboutProduct']);
           products.add(model);
         }
         // var data =
@@ -38,21 +38,21 @@ class AdminHomePageBloc extends Bloc<AdminHomePageEvent, AdminHomePageState> {
         //       userId: data.docs[i].data()['userID'],
         //       productId: data.docs[i].data()['productID'],
         //       name: data.docs[i].data()['name'],
-        //       price: data.docs[i].data()['price'],
-        //       quantity: data.docs[i].data()['quantity'],
-        //       category: data.docs[i].data()['category'],
+        //       productPrice: data.docs[i].data()['productPrice'],
+        //       productQuantity: data.docs[i].data()['productQuantity'],
+        //       productType: data.docs[i].data()['productType'],
         //       imageUrl: data.docs[i].data()['imageUrl'],
-        //       description: data.docs[i].data()['description']);
+        //       aboutProduct: data.docs[i].data()['aboutProduct']);
         //   products.add(model);
         // }
         for (var c in products) {
-          if (c.category == 'color cosmetics') {
+          if (c.productType == 'color cosmetics') {
             colorCosmetics.add(c);
-          } else if (c.category == 'fragrance') {
+          } else if (c.productType == 'fragrance') {
             fragrance.add(c);
-          } else if (c.category == 'skin care') {
+          } else if (c.productType == 'skin care') {
             skinCare.add(c);
-          } else if (c.category == 'hair care') {
+          } else if (c.productType == 'hair care') {
             hairCare.add(c);
           }
         }

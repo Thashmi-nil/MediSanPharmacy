@@ -1,11 +1,12 @@
-import 'package:medisan/views/customer/cust_products/customer_product_list_page_provider.dart';
+import 'package:medisan/views/customer/cust_product_main/cust_products/customer_product_list_page_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../styles/color_palette.dart';
 import '../../../utilities/util_carousel_slider.dart';
-import '../cust_item_search/all_item_search_page_provider.dart';
-import '../cust_order/customer_order_page_bloc.dart';
-import '../cust_order/customer_order_page_state.dart';
+import '../cust_item_search/all_item_search_provider.dart';
+import '../cust_order_main/cust_order/cust_order_bloc.dart';
+import '../cust_order_main/cust_order/cust_order_state.dart';
+import '../cust_profile/cust_profile_provider.dart';
 
 class CustomerHomePageView extends StatefulWidget {
   const CustomerHomePageView({Key? key}) : super(key: key);
@@ -51,14 +52,14 @@ class _CustomerHomePageViewState extends State<CustomerHomePageView> {
                   ),
                   Positioned(
                     bottom: 45,
-                    left: 200.0,
-                    right: 15.0,
+                    left: 160.0,
+                    right: 70.0,
                     child: InkWell(
                       onTap: () {
                         Navigator.of(context).push(
                           MaterialPageRoute(
                             builder: ((context) => AllItemSearchPageProvider(
-                                  category: 'ALL',
+                                  productType: 'ALL',
                                 )),
                           ),
                         );
@@ -104,6 +105,27 @@ class _CustomerHomePageViewState extends State<CustomerHomePageView> {
                       ),
                     ),
                   ),
+                  Positioned(
+                      bottom: 55,
+                      left: 350.0,
+                      // right: 70.0,
+                      child: InkWell(
+                          onTap: () {
+                            Navigator.of(context).push(
+                              MaterialPageRoute(
+                                builder: ((context) =>
+                                    CustomerProfilePageProvider()),
+                              ),
+                            );
+                          },
+                          child: Container(
+                              padding: const EdgeInsets.only(left: 20.0),
+                              child: Row(children: [
+                                const Icon(
+                                  Icons.account_circle,
+                                  color: CustomColors.BACKGROUND,
+                                ),
+                              ]))))
                 ],
               ),
             ),
@@ -116,7 +138,7 @@ class _CustomerHomePageViewState extends State<CustomerHomePageView> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    'Category',
+                    'Products',
                     style: Theme.of(context).textTheme.headline3!.copyWith(
                           color: CustomColors.ONSURFACE,
                         ),
@@ -147,13 +169,13 @@ class _CustomerHomePageViewState extends State<CustomerHomePageView> {
                       //       MaterialPageRoute(
                       //         builder: ((context) =>
                       //             CustomerProductListPageProvider(
-                      //               title: 'Medicine',
+                      //               title: 'medicine',
                       //             )),
                       //       ),
                       //     );
                       //   },
                       //   imagePath: 'assets/icons/capsule.png',
-                      //   title: 'Medicine',
+                      //   title: 'medicine',
                       // ),
                     ],
                   ),
@@ -183,13 +205,13 @@ class _CustomerHomePageViewState extends State<CustomerHomePageView> {
                             MaterialPageRoute(
                               builder: ((context) =>
                                   CustomerProductListPageProvider(
-                                    title: 'Medicine',
+                                    title: 'medicine',
                                   )),
                             ),
                           );
                         },
                         imagePath: 'assets/icons/capsule.png',
-                        title: 'Medicine',
+                        title: 'medicine',
                       ),
                     ],
                   ),
@@ -205,13 +227,13 @@ class _CustomerHomePageViewState extends State<CustomerHomePageView> {
                             MaterialPageRoute(
                               builder: ((context) =>
                                   CustomerProductListPageProvider(
-                                    title: 'fragrance',
+                                    title: 'healthcare',
                                   )),
                             ),
                           );
                         },
                         imagePath: 'assets/icons/healthcare.png',
-                        title: 'fragrance',
+                        title: 'healthcare',
                       ),
                     ],
                   ),
@@ -227,13 +249,13 @@ class _CustomerHomePageViewState extends State<CustomerHomePageView> {
                             MaterialPageRoute(
                               builder: ((context) =>
                                   CustomerProductListPageProvider(
-                                    title: 'Lab Tests',
+                                    title: 'labTests',
                                   )),
                             ),
                           );
                         },
                         imagePath: 'assets/icons/labTest.png',
-                        title: 'Lab Tests',
+                        title: 'labTests',
                       ),
                     ],
                   ),

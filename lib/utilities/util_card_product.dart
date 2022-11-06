@@ -9,9 +9,9 @@ import 'package:form_field_validator/form_field_validator.dart';
 import '../models/product_model.dart';
 import '../styles/color_palette.dart';
 import '../views/owner/own_new_product/new_product_view.dart';
-import '../views/customer/cust_item_search/all_item_search_page_provider.dart';
-import '../views/customer/cust_products/customer_product_list_page_bloc.dart';
-import '../views/customer/cust_products/customer_product_list_page_event.dart';
+import '../views/customer/cust_item_search/all_item_search_provider.dart';
+import '../views/customer/cust_product_main/cust_products/customer_product_list_page_bloc.dart';
+import '../views/customer/cust_product_main/cust_products/customer_product_list_page_event.dart';
 import 'util_update_btn.dart';
 
 class CusProductCard extends StatefulWidget {
@@ -47,10 +47,11 @@ class _CusProductCardState extends State<CusProductCard> {
   void initState() {
     super.initState();
     nameTextEditingController.text = widget.productModel.name;
-    priceTextEditingController.text = widget.productModel.price.toString();
+    priceTextEditingController.text =
+        widget.productModel.productPrice.toString();
     quantityTextEditingController.text =
-        widget.productModel.quantity.toString();
-    descriptionTextEditingController.text = widget.productModel.description;
+        widget.productModel.productQuantity.toString();
+    descriptionTextEditingController.text = widget.productModel.aboutProduct;
     log(widget.productModel.name);
   }
 
@@ -62,9 +63,11 @@ class _CusProductCardState extends State<CusProductCard> {
       width: double.infinity,
       height: 116.0,
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(10.0),
-        color: CustomColors.BACKGROUND,
-      ),
+          borderRadius: BorderRadius.circular(10.0),
+          color: CustomColors.SCAFFOLD,
+          border: Border.all(
+            color: CustomColors.ONSURFACE,
+          )),
       child: Padding(
         padding: const EdgeInsets.all(10.0),
         child: Row(
@@ -97,15 +100,15 @@ class _CusProductCardState extends State<CusProductCard> {
                     softWrap: false,
                   ),
                 ),
-                SizedBox(
-                  width: 140.0,
-                  child: Text(
-                    'The best place to buy medisan products in Sri Lanka',
-                    style: Theme.of(context).textTheme.headline5!.copyWith(
-                          color: CustomColors.SECONDARY,
-                        ),
-                  ),
-                ),
+                // SizedBox(
+                //   width: 140.0,
+                //   child: Text(
+                //     'The best place to buy medisan products in Sri Lanka',
+                //     style: Theme.of(context).textTheme.headline5!.copyWith(
+                //           color: CustomColors.SECONDARY,
+                //         ),
+                //   ),
+                // ),
                 widget.mode == 'customer'
                     ? InkWell(
                         onTap: () {
@@ -158,11 +161,13 @@ class _CusProductCardState extends State<CusProductCard> {
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
                 Text(
-                  '${widget.productModel.price}\$',
+                  'Rs. ${widget.productModel.productPrice}',
                   style: Theme.of(context).textTheme.headline4!.copyWith(
                         color: CustomColors.PRIMARY,
                       ),
                 ),
+
+                // UPDATE MODEL
                 widget.mode == 'customer'
                     ? InkWell(
                         onTap: widget.tapAddItem,
@@ -201,11 +206,12 @@ class _CusProductCardState extends State<CusProductCard> {
                                                     BorderRadius.circular(40)),
                                             elevation: 16,
                                             child: Container(
-                                              width: 280.0,
-                                              height: MediaQuery.of(context)
-                                                      .size
-                                                      .height *
-                                                  0.8,
+                                              width: 350.0,
+                                              height: 480,
+                                              // height: MediaQuery.of(context)
+                                              //         .size
+                                              //         .height *
+                                              //     0.8,
                                               decoration: BoxDecoration(
                                                 borderRadius:
                                                     BorderRadius.circular(15.0),
@@ -221,11 +227,27 @@ class _CusProductCardState extends State<CusProductCard> {
                                                       child: Column(
                                                         mainAxisAlignment:
                                                             MainAxisAlignment
-                                                                .start,
+                                                                .center,
                                                         crossAxisAlignment:
                                                             CrossAxisAlignment
-                                                                .start,
+                                                                .center,
                                                         children: [
+                                                          Text(
+                                                            'Update',
+                                                            style: Theme.of(
+                                                                    context)
+                                                                .textTheme
+                                                                .headline4!
+                                                                .copyWith(
+                                                                  color: CustomColors
+                                                                      .PRIMARY,
+                                                                  fontSize:
+                                                                      18.0,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .bold,
+                                                                ),
+                                                          ),
                                                           LineInputField(
                                                             hintText: 'Name',
                                                             maxLength: 50,
@@ -240,7 +262,8 @@ class _CusProductCardState extends State<CusProductCard> {
                                                             height: 10.0,
                                                           ),
                                                           LineInputField(
-                                                            hintText: 'Price',
+                                                            hintText:
+                                                                'Product Price',
                                                             maxLength: 10,
                                                             keyBoardType:
                                                                 'number',
@@ -266,12 +289,12 @@ class _CusProductCardState extends State<CusProductCard> {
                                                           ),
                                                           LineInputField(
                                                             hintText:
-                                                                'Description',
+                                                                'About Product',
                                                             maxLength: 2000,
                                                             validator:
                                                                 RequiredValidator(
                                                                     errorText:
-                                                                        'Description is required'),
+                                                                        'About Product is required'),
                                                             controller:
                                                                 descriptionTextEditingController,
                                                           ),
@@ -308,18 +331,18 @@ class _CusProductCardState extends State<CusProductCard> {
                                                                 collection
                                                                     .doc(widget
                                                                         .productModel
-                                                                        .documentID)
+                                                                        .docID)
                                                                     .update({
                                                                       'name': nameTextEditingController
                                                                           .text
                                                                           .trim(),
-                                                                      "price": double.parse(priceTextEditingController
+                                                                      "productPrice": double.parse(priceTextEditingController
                                                                           .text
                                                                           .trim()),
-                                                                      "quantity": double.parse(quantityTextEditingController
+                                                                      "productQuantity": double.parse(quantityTextEditingController
                                                                           .text
                                                                           .trim()),
-                                                                      "description": descriptionTextEditingController
+                                                                      "aboutProduct": descriptionTextEditingController
                                                                           .text
                                                                           .trim()
                                                                     }) // <-- Updated data
@@ -336,7 +359,7 @@ class _CusProductCardState extends State<CusProductCard> {
                                                                     builder:
                                                                         ((context) =>
                                                                             AllItemSearchPageProvider(
-                                                                              category: "ALL",
+                                                                              productType: "ALL",
                                                                               mode: 'admin',
                                                                             )),
                                                                   ),
@@ -365,6 +388,8 @@ class _CusProductCardState extends State<CusProductCard> {
                                   color: CustomColors.ERROR,
                                 )),
                           ),
+
+                          // DELETE MODEL
                           InkWell(
                             onTap: () async {
                               showDialog(
@@ -377,7 +402,7 @@ class _CusProductCardState extends State<CusProductCard> {
                                     elevation: 16,
                                     child: Container(
                                       width: 250.0,
-                                      height: 150.0,
+                                      height: 170.0,
                                       decoration: BoxDecoration(
                                         borderRadius:
                                             BorderRadius.circular(15.0),
@@ -393,8 +418,7 @@ class _CusProductCardState extends State<CusProductCard> {
                                                   .textTheme
                                                   .headline4!
                                                   .copyWith(
-                                                    color:
-                                                        CustomColors.SECONDARY,
+                                                    color: CustomColors.ERROR,
                                                     fontSize: 18.0,
                                                     fontWeight: FontWeight.bold,
                                                   ),
@@ -422,13 +446,13 @@ class _CusProductCardState extends State<CusProductCard> {
                                                   MainAxisAlignment
                                                       .spaceBetween,
                                               children: [
-                                                PopupWindowButton(
+                                                PopupModelButton(
                                                     isDeteled: false,
                                                     tap: () {
                                                       Navigator.of(context)
                                                           .pop();
                                                     }),
-                                                PopupWindowButton(
+                                                PopupModelButton(
                                                     isDeteled: true,
                                                     tap: () async {
                                                       try {
@@ -440,7 +464,7 @@ class _CusProductCardState extends State<CusProductCard> {
                                                         await collection
                                                             .doc(widget
                                                                 .productModel
-                                                                .documentID)
+                                                                .docID)
                                                             .delete()
                                                             .then((_) => print(
                                                                 'Deleted'))
@@ -452,7 +476,7 @@ class _CusProductCardState extends State<CusProductCard> {
                                                           MaterialPageRoute(
                                                             builder: ((context) =>
                                                                 AllItemSearchPageProvider(
-                                                                  category:
+                                                                  productType:
                                                                       "ALL",
                                                                   mode: 'admin',
                                                                 )),

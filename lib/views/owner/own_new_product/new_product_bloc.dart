@@ -40,10 +40,10 @@ class AddProductPageBloc
           "userID": auth.currentUser!.uid,
           "productID": uuid.v4(),
           "name": event.name,
-          "category": event.category,
-          "price": event.price,
-          "quantity": event.quantity,
-          "description": event.description,
+          "productType": event.productType,
+          "productPrice": event.productPrice,
+          "productQuantity": event.productQuantity,
+          "aboutProduct": event.aboutProduct,
           "imageUrl": event.imageUrl,
         };
         await firestore.collection('products').doc(uuid.v4()).set(productData);

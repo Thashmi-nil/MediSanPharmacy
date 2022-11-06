@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../styles/color_palette.dart';
-import '../../customer/cust_order/customer_order_page_bloc.dart';
-import '../../customer/cust_order/customer_order_page_provider.dart';
+import '../../customer/cust_order_main/cust_order/cust_order_bloc.dart';
+import '../../customer/cust_order_main/cust_order/cust_order_provider.dart';
 import '../own_new_product/new_product_provider.dart';
 import '../own_profile/own_profile_provider.dart';
 import 'own_home_provider.dart';
@@ -68,12 +68,6 @@ class _AdminTabBarViewState extends State<AdminTabBarView> {
                 Icons.shopping_bag_outlined,
               ),
               label: 'Orders',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(
-                Icons.account_circle_outlined,
-              ),
-              label: 'Profile',
             ),
           ],
         ),

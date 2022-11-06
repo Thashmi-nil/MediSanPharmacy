@@ -3,10 +3,10 @@ import 'package:flutter/material.dart';
 
 import '../styles/color_palette.dart';
 
-class PopupWindowButton extends StatelessWidget {
+class PopupModelButton extends StatelessWidget {
   final VoidCallback tap;
   final bool isDeteled;
-  const PopupWindowButton({
+  const PopupModelButton({
     required this.tap,
     this.isDeteled = true,
     Key? key,
@@ -23,8 +23,8 @@ class PopupWindowButton extends StatelessWidget {
                   width: 120.0,
                   height: 40.0,
                   decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(15.0),
-                    color: CustomColors.PRIMARY,
+                    borderRadius: BorderRadius.circular(5.0),
+                    color: CustomColors.ERROR,
                   ),
                   child: Center(
                     child: Text(
@@ -44,14 +44,14 @@ class PopupWindowButton extends StatelessWidget {
                     border: Border.all(
                       color: CustomColors.SECONDARY,
                     ),
-                    borderRadius: BorderRadius.circular(15.0),
+                    borderRadius: BorderRadius.circular(5.0),
                     color: CustomColors.BACKGROUND,
                   ),
                   child: Center(
                     child: Text(
                       'Cancel',
                       style: Theme.of(context).textTheme.headline4!.copyWith(
-                            color: CustomColors.PRIMARY,
+                            color: CustomColors.ERROR,
                             fontSize: 18.0,
                             fontWeight: FontWeight.bold,
                           ),

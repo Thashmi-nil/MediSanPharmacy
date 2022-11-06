@@ -1,13 +1,13 @@
 part of 'get_category_bloc.dart';
 
 class GetCategoryState {
-  final String category;
-  const GetCategoryState({required this.category});
+  final String productType;
+  const GetCategoryState({required this.productType});
   static GetCategoryState get initialState =>
-      const GetCategoryState(category: '');
+      const GetCategoryState(productType: '');
   GetCategoryState clone({
-    String? category,
+    String? productType,
   }) {
-    return GetCategoryState(category: category ?? this.category);
+    return GetCategoryState(productType: productType ?? this.productType);
   }
 }

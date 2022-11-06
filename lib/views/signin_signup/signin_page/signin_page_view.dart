@@ -35,7 +35,6 @@ class _SignINPageViewState extends State<SignINPageView> {
   Widget build(BuildContext context) {
     SignINPageBloc bloc = BlocProvider.of<SignINPageBloc>(context);
     var body = Scaffold(
-      
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(20.0),
@@ -55,7 +54,7 @@ class _SignINPageViewState extends State<SignINPageView> {
                 height: 40.0,
               ),
               Text(
-                'Welcome back! You’ve been missed',
+                'Welcome To MediSan !',
                 style: Theme.of(context).textTheme.headline2,
               ),
               const SizedBox(

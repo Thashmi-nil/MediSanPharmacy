@@ -34,7 +34,7 @@ class _AdminViewFeedBackPageViewState extends State<AdminViewFeedBackPageView> {
                     onTap: () {
                       Navigator.of(context).pop();
                     },
-                    child: const Icon(Icons.arrow_back),
+                    child: const Icon(Icons.arrow_back_ios),
                   ),
                   Image.asset(
                     'assets/icons/logo_icon.png',

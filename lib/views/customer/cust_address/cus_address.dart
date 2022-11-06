@@ -38,7 +38,7 @@ class _CustomerAddAddressPageViewState
                 onTap: () {
                   Navigator.of(context).pop();
                 },
-                child: const Icon(Icons.arrow_back),
+                child: const Icon(Icons.arrow_back_ios),
               ),
               Image.asset(
                 'assets/icons/logo_icon.png',
@@ -113,15 +113,6 @@ class _CustomerAddAddressPageViewState
                           height: 20.0,
                         ),
                         LabelInputFeild(
-                          controller: bloc.postalCodeTextEditingController,
-                          hintText: 'Postal code',
-                          validator: RequiredValidator(
-                              errorText: 'Postal code is required'),
-                        ),
-                        const SizedBox(
-                          height: 20.0,
-                        ),
-                        LabelInputFeild(
                           keyboardType: 'number',
                           controller: bloc.phoneTextEditingController,
                           hintText: 'Phone number',
@@ -150,10 +141,9 @@ class _CustomerAddAddressPageViewState
                 AddAddressEvent(
                   addressLineOne:
                       bloc.addressLineOneTextEditingController.text.trim(),
-                  city: bloc.cityTextEditingController.text.trim(),
+                  addressLineCity: bloc.cityTextEditingController.text.trim(),
                   name: bloc.nameTextEditingController.text.trim(),
-                  phone: bloc.phoneTextEditingController.text.trim(),
-                  postalCode: bloc.postalCodeTextEditingController.text.trim(),
+                  phoneNumber: bloc.phoneTextEditingController.text.trim(),
                 ),
               );
             }

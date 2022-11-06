@@ -11,27 +11,24 @@ class AddressModel {
     required this.addressId,
     required this.name,
     required this.addressLineOne,
-    required this.phone,
-    required this.city,
-    required this.postalCode,
+    required this.phoneNumber,
+    required this.addressLineCity,
   });
 
   String userId;
   String addressId;
   String name;
   String addressLineOne;
-  String phone;
-  String city;
-  String postalCode;
+  String phoneNumber;
+  String addressLineCity;
 
   factory AddressModel.fromJson(Map<String, dynamic> json) => AddressModel(
         userId: json["userID"],
         addressId: json["addressID"],
         name: json["name"],
         addressLineOne: json["addressLineOne"],
-        phone: json["phone"],
-        city: json["city"],
-        postalCode: json["postalCode"],
+        phoneNumber: json["phoneNumber"],
+        addressLineCity: json["addressLineCity"],
       );
 
   Map<String, dynamic> toJson() => {
@@ -39,8 +36,7 @@ class AddressModel {
         "addressID": addressId,
         "name": name,
         "addressLineOne": addressLineOne,
-        "phone": phone,
-        "city": city,
-        "postalCode": postalCode,
+        "phoneNumber": phoneNumber,
+        "addressLineCity": addressLineCity,
       };
 }

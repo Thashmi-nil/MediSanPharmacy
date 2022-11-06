@@ -3,7 +3,7 @@
 // import 'package:medisan/models/product_model.dart';
 import 'package:medisan/views/owner/own_products/own_products_view.dart';
 import 'package:medisan/views/owner/own_home/own_home_state.dart';
-import 'package:medisan/views/customer/cust_order/customer_order_page_bloc.dart';
+import 'package:medisan/views/customer/cust_order_main/cust_order/cust_order_bloc.dart';
 // import 'package:medisan/views/customer/cust_order/customer_order_page_state.dart';
 // import 'package:cloud_firestore/cloud_firestore.dart';
 // import 'package:firebase_auth/firebase_auth.dart';
@@ -11,9 +11,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../styles/color_palette.dart';
-import '../../customer/cust_item_search/all_item_search_page_provider.dart';
+import '../../customer/cust_item_search/all_item_search_provider.dart';
 // import '../../initials/page_two.dart';
 import 'own_home_bloc.dart';
+
+import '../own_profile/own_profile_provider.dart';
 
 class AdminHomePageView extends StatefulWidget {
   const AdminHomePageView({Key? key}) : super(key: key);
@@ -28,15 +30,15 @@ class _AdminHomePageViewState extends State<AdminHomePageView> {
   int selectedIndex = 1;
   List<String> menuItem = [
     'All',
-    'Medicine',
-    'fragrance',
-    'Lab Tests',
+    'medicine',
+    'healthcare',
+    'labTests',
   ];
   @override
   Widget build(BuildContext context) {
-    AdminHomePageBloc bloc = BlocProvider.of<AdminHomePageBloc>(context);
-    CustomerOrderPageBloc cusBloc =
-        BlocProvider.of<CustomerOrderPageBloc>(context);
+    // AdminHomePageBloc bloc = BlocProvider.of<AdminHomePageBloc>(context);
+    // CustomerOrderPageBloc cusBloc =
+    //     BlocProvider.of<CustomerOrderPageBloc>(context);
     return Scaffold(
       backgroundColor: CustomColors.SCAFFOLD,
       body: BlocBuilder<AdminHomePageBloc, AdminHomePageState>(
@@ -152,8 +154,8 @@ class _AdminHomePageViewState extends State<AdminHomePageView> {
                         // ),
                         Positioned(
                           bottom: 15,
-                          left: 200.0,
-                          right: 15.0,
+                          left: 160.0,
+                          right: 70.0,
                           child: InkWell(
                             onTap: () {
                               Navigator.of(context).push(
@@ -161,7 +163,7 @@ class _AdminHomePageViewState extends State<AdminHomePageView> {
                                   builder: ((context) =>
                                       AllItemSearchPageProvider(
                                         mode: 'admin',
-                                        category: "ALL",
+                                        productType: "ALL",
                                       )),
                                 ),
                               );
@@ -208,6 +210,27 @@ class _AdminHomePageViewState extends State<AdminHomePageView> {
                             ),
                           ),
                         ),
+                        Positioned(
+                            bottom: 25,
+                            left: 350.0,
+                            // right: 70.0,
+                            child: InkWell(
+                                onTap: () {
+                                  Navigator.of(context).push(
+                                    MaterialPageRoute(
+                                      builder: ((context) =>
+                                          AdminProfilePageProvider()),
+                                    ),
+                                  );
+                                },
+                                child: Container(
+                                    padding: const EdgeInsets.only(left: 20.0),
+                                    child: Row(children: [
+                                      const Icon(
+                                        Icons.account_circle,
+                                        color: CustomColors.BACKGROUND,
+                                      ),
+                                    ]))))
                       ],
                     ),
                   ),
@@ -290,8 +313,10 @@ class _AdminHomePageViewState extends State<AdminHomePageView> {
                                       );
                                     },
                                     prodName: state.products[i].name,
-                                    prodPrice: '${state.products[i].price}',
-                                    quantity: '${state.products[i].quantity}',
+                                    prodPrice:
+                                        '${state.products[i].productPrice}',
+                                    productQuantity:
+                                        '${state.products[i].productQuantity}',
                                     imagePath: state.products[i].imageUrl,
                                   );
                                 },
@@ -326,9 +351,10 @@ class _AdminHomePageViewState extends State<AdminHomePageView> {
                                           );
                                         },
                                         prodName: state.skinCare[i].name,
-                                        prodPrice: '${state.skinCare[i].price}',
-                                        quantity:
-                                            '${state.skinCare[i].quantity}',
+                                        prodPrice:
+                                            '${state.skinCare[i].productPrice}',
+                                        productQuantity:
+                                            '${state.skinCare[i].productQuantity}',
                                         imagePath: state.skinCare[i].imageUrl,
                                       );
                                     },
@@ -365,9 +391,9 @@ class _AdminHomePageViewState extends State<AdminHomePageView> {
                                             },
                                             prodName: state.hairCare[i].name,
                                             prodPrice:
-                                                '${state.hairCare[i].price}',
-                                            quantity:
-                                                '${state.hairCare[i].quantity}',
+                                                '${state.hairCare[i].productPrice}',
+                                            productQuantity:
+                                                '${state.hairCare[i].productQuantity}',
                                             imagePath:
                                                 state.hairCare[i].imageUrl,
                                           );
@@ -407,9 +433,9 @@ class _AdminHomePageViewState extends State<AdminHomePageView> {
                                                 prodName:
                                                     state.fragrance[i].name,
                                                 prodPrice:
-                                                    '${state.fragrance[i].price}',
-                                                quantity:
-                                                    '${state.fragrance[i].quantity}',
+                                                    '${state.fragrance[i].productPrice}',
+                                                productQuantity:
+                                                    '${state.fragrance[i].productQuantity}',
                                                 imagePath:
                                                     state.fragrance[i].imageUrl,
                                               );
@@ -452,9 +478,9 @@ class _AdminHomePageViewState extends State<AdminHomePageView> {
                                                     prodName: state
                                                         .colorCosmetics[i].name,
                                                     prodPrice:
-                                                        '${state.colorCosmetics[i].price}',
-                                                    quantity:
-                                                        '${state.colorCosmetics[i].quantity}',
+                                                        '${state.colorCosmetics[i].productPrice}',
+                                                    productQuantity:
+                                                        '${state.colorCosmetics[i].productQuantity}',
                                                     imagePath: state
                                                         .colorCosmetics[i]
                                                         .imageUrl,
@@ -477,7 +503,7 @@ class _AdminHomePageViewState extends State<AdminHomePageView> {
 class AdminProductCart extends StatelessWidget {
   final String prodName;
   final String prodPrice;
-  final String quantity;
+  final String productQuantity;
   final String imagePath;
   final VoidCallback tap;
 
@@ -486,7 +512,7 @@ class AdminProductCart extends StatelessWidget {
     required this.imagePath,
     required this.prodName,
     required this.prodPrice,
-    required this.quantity,
+    required this.productQuantity,
     required this.tap,
   }) : super(key: key);
 
@@ -528,13 +554,13 @@ class AdminProductCart extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    '\$ $prodPrice',
+                    '\Rs. $prodPrice',
                     style: Theme.of(context).textTheme.headline4!.copyWith(
                           color: CustomColors.SECONDARY,
                         ),
                   ),
                   Text(
-                    '${quantity}ML',
+                    '${productQuantity}',
                     style: Theme.of(context).textTheme.headline4!.copyWith(
                           color: CustomColors.SECONDARY,
                         ),

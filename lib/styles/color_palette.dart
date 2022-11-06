@@ -11,7 +11,7 @@ abstract class CustomColors {
   static const Color ERROR = Color(0xFFEB5555);
   static const Color SECONDARY = Color(0xFF808080);
   static const Color BACKGROUND = Color(0xFFFFFFFF);
-  static const Color SCAFFOLD = Color(0xFFFFF5F5);
+  static const Color SCAFFOLD = Color.fromARGB(255, 218, 255, 240);
   static const Color DARKISH = Color(0xFFFF3DD2);
 
   static Color darker(Color c) {

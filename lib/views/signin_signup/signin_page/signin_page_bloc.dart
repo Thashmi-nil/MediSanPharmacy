@@ -2,6 +2,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:medisan/views/prescriptionChecker/pcheck_home/pcheck_home_topbar.dart';
 import 'package:top_snackbar_flutter/custom_snack_bar.dart';
 import 'package:top_snackbar_flutter/top_snack_bar.dart';
 import '../../../styles/color_palette.dart';
@@ -48,10 +49,16 @@ class SignINPageBloc extends Bloc<SignINPageEvent, SignINPageState> {
             ),
           );
         });
-        if (auth.currentUser!.email == 'admin@gmail.com') {
+        if (auth.currentUser!.email == 'adminowner@gmail.com') {
           Navigator.of(context).push(
             MaterialPageRoute(
               builder: ((context) => const AdminTabBarView()),
+            ),
+          );
+        } else if (auth.currentUser!.email == 'checker@gmail.com') {
+          Navigator.of(context).push(
+            MaterialPageRoute(
+              builder: ((context) => const PCheckerTabBarView()),
             ),
           );
         } else {

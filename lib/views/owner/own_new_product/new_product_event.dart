@@ -5,18 +5,18 @@ abstract class AddProductPageEvent {}
 
 class AddNewProductEvent extends AddProductPageEvent {
   final String name;
-  final double price;
-  final double quantity;
-  final String category;
-  final String description;
+  final double productPrice;
+  final double productQuantity;
+  final String productType;
+  final String aboutProduct;
   final String imageUrl;
 
   AddNewProductEvent({
-    required this.category,
-    required this.description,
+    required this.productType,
+    required this.aboutProduct,
     required this.name,
-    required this.price,
-    required this.quantity,
+    required this.productPrice,
+    required this.productQuantity,
     required this.imageUrl,
   });
 }

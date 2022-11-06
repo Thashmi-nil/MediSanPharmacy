@@ -19,9 +19,9 @@ class AddProductPageView extends StatefulWidget {
 class _AddProductPageViewState extends State<AddProductPageView> {
   var currentSelectedValue;
   List<String> gender = [
-    "Medicine",
-    "fragrance",
-    "Lab Tests",
+    "medicine",
+    "healthcare",
+    "labTests",
   ];
   final _formKey = GlobalKey<FormState>();
 
@@ -42,7 +42,7 @@ class _AddProductPageViewState extends State<AddProductPageView> {
                 if (state.isLoading) {
                   const Center(
                     child: CircularProgressIndicator.adaptive(
-                      backgroundColor: Colors.blue,
+                      backgroundColor: CustomColors.PRIMARY,
                     ),
                   );
                 }
@@ -99,8 +99,11 @@ class _AddProductPageViewState extends State<AddProductPageView> {
                           RequiredValidator(errorText: 'Item name is required'),
                       controller: bloc.nameTextEditingController,
                     ),
+                    const SizedBox(
+                      height: 10.0,
+                    ),
                     Text(
-                      'Category',
+                      'Product Type',
                       style: Theme.of(context).textTheme.headline4,
                       textAlign: TextAlign.start,
                     ),
@@ -170,10 +173,10 @@ class _AddProductPageViewState extends State<AddProductPageView> {
                       controller: bloc.quantityTextEditingController,
                     ),
                     LineInputField(
-                      hintText: 'Description',
+                      hintText: 'About Product',
                       maxLength: 2000,
                       validator: RequiredValidator(
-                          errorText: 'Description is required'),
+                          errorText: 'About Product is required'),
                       controller: bloc.descriptionTextEditingController,
                     ),
                   ],
@@ -221,13 +224,13 @@ class _AddProductPageViewState extends State<AddProductPageView> {
                   if (_formKey.currentState!.validate()) {
                     bloc.add(
                       AddNewProductEvent(
-                        category: state.category,
-                        description:
+                        productType: state.productType,
+                        aboutProduct:
                             bloc.descriptionTextEditingController.text.trim(),
                         name: bloc.nameTextEditingController.text.trim(),
-                        price: double.parse(
+                        productPrice: double.parse(
                             bloc.priceTextEditingController.text.trim()),
-                        quantity: double.parse(
+                        productQuantity: double.parse(
                             bloc.quantityTextEditingController.text.trim()),
                         imageUrl: bloc.state.imageUrl,
                       ),

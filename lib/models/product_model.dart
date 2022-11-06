@@ -6,47 +6,47 @@ String productModelToJson(ProductModel data) => json.encode(data.toJson());
 
 class ProductModel {
   ProductModel({
-    required this.documentID,
+    required this.docID,
     required this.userId,
+    required this.imageUrl,
     required this.productId,
     required this.name,
-    required this.price,
-    required this.quantity,
-    required this.category,
-    required this.imageUrl,
-    required this.description,
+    required this.productPrice,
+    required this.productQuantity,
+    required this.productType,
+    required this.aboutProduct,
   });
-  String documentID;
+  String docID;
   String userId;
-  String productId;
   String name;
-  double price;
-  double quantity;
-  String category;
+  String productType;
+  double productPrice;
+  double productQuantity;
   String imageUrl;
-  String description;
+  String aboutProduct;
+  String productId;
 
   factory ProductModel.fromJson(Map<String, dynamic> json) => ProductModel(
-        documentID: json["documentID"],
+        docID: json["docID"],
         userId: json["userID"],
         productId: json["productID"],
         name: json["name"],
-        price: json["price"].toDouble(),
-        quantity: json["quantity"],
-        category: json["category"],
+        productPrice: json["productPrice"].toDouble(),
+        productQuantity: json["productQuantity"],
+        productType: json["productType"],
         imageUrl: json["imageUrl"],
-        description: json["description"],
+        aboutProduct: json["aboutProduct"],
       );
 
   Map<String, dynamic> toJson() => {
-        "documentID": documentID,
+        "docID": docID,
         "userID": userId,
         "productID": productId,
         "name": name,
-        "price": price,
-        "quantity": quantity,
-        "category": category,
+        "productPrice": productPrice,
+        "productQuantity": productQuantity,
+        "productType": productType,
         "imageUrl": imageUrl,
-        "description": description,
+        "aboutProduct": aboutProduct,
       };
 }

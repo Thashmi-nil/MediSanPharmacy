@@ -21,7 +21,7 @@ class CustomUpdateButton extends StatelessWidget {
               height: 40.0,
               width: 120.0,
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(10.0),
+                borderRadius: BorderRadius.circular(5.0),
                 color: CustomColors.PRIMARY,
               ),
               child: Center(
@@ -41,7 +41,7 @@ class CustomUpdateButton extends StatelessWidget {
               height: 40.0,
               width: 120.0,
               decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10.0),
+                  borderRadius: BorderRadius.circular(5.0),
                   color: CustomColors.BACKGROUND,
                   border: Border.all(
                     color: CustomColors.PRIMARY,

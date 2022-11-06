@@ -53,7 +53,7 @@ class _SignupPageViewState extends State<SignupPageView> {
               height: 40.0,
             ),
             Text(
-              'Let’s create your account',
+              'Create New Account',
               style: Theme.of(context).textTheme.headline2,
             ),
             const SizedBox(

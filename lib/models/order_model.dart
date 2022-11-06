@@ -7,10 +7,10 @@ String orderModelToJson(OrderModel data) => json.encode(data.toJson());
 
 class OrderModel {
   OrderModel({
-    required this.mainID,
-    required this.city,
+    required this.mainOrderID,
+    required this.addressLineCity,
     required this.name,
-    required this.phone,
+    required this.phoneNumber,
     required this.customerId,
     required this.address,
     required this.date,
@@ -18,10 +18,10 @@ class OrderModel {
     required this.orderId,
     required this.products,
   });
-  String city;
+  String addressLineCity;
   String name;
-  String mainID;
-  String phone;
+  String mainOrderID;
+  String phoneNumber;
   String customerId;
   String address;
   String date;
@@ -30,10 +30,10 @@ class OrderModel {
   List<dynamic> products;
 
   factory OrderModel.fromJson(Map<String, dynamic> json) => OrderModel(
-        city: json["city"],
+        addressLineCity: json["addressLineCity"],
         name: json["name"],
-        phone: json["phone"],
-        mainID: json["mainID"],
+        phoneNumber: json["phoneNumber"],
+        mainOrderID: json["mainOrderID"],
         customerId: json["customerID"],
         address: json["address"],
         date: json["date"],
@@ -42,10 +42,10 @@ class OrderModel {
         products: List<dynamic>.from(json["products"].map((x) => x)),
       );
   Map<String, dynamic> toJson() => {
-        "city": city,
+        "addressLineCity": addressLineCity,
         "name": name,
-        "phone": phone,
-        "mainID": mainID,
+        "phoneNumber": phoneNumber,
+        "mainOrderID": mainOrderID,
         "customerID": customerId,
         "address": address,
         "date": date,

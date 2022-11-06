@@ -1,11 +1,11 @@
-import 'package:medisan/views/customer/cust_item_search/all_item_search_page_provider.dart';
+import 'package:medisan/views/customer/cust_item_search/all_item_search_provider.dart';
 import 'package:medisan/views/customer/cust_home/cust_home_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../styles/color_palette.dart';
-import '../cust_order/customer_order_page_bloc.dart';
-import '../cust_order/customer_order_page_provider.dart';
-import '../cust_profile/customer_profile_page_provider.dart';
+import '../cust_order_main/cust_order/cust_order_bloc.dart';
+import '../cust_order_main/cust_order/cust_order_provider.dart';
+import '../cust_profile/cust_profile_provider.dart';
 
 class CustomerTabBarView extends StatefulWidget {
   const CustomerTabBarView({Key? key}) : super(key: key);
@@ -20,7 +20,7 @@ class _CustomerTabBarViewState extends State<CustomerTabBarView> {
     CustomerHomePageProvider(),
     AllItemSearchPageProvider(
       searchLocation: 'tabbar',
-      category: 'ALL',
+      productType: 'ALL',
     ),
     CustomerOrderPageProvider(
       role: 'customer',
@@ -72,12 +72,12 @@ class _CustomerTabBarViewState extends State<CustomerTabBarView> {
               ),
               label: 'My Orders',
             ),
-            BottomNavigationBarItem(
-              icon: Icon(
-                Icons.account_circle_outlined,
-              ),
-              label: 'Profile',
-            ),
+            // BottomNavigationBarItem(
+            //   icon: Icon(
+            //     Icons.account_circle_outlined,
+            //   ),
+            //   label: 'Profile',
+            // ),
           ],
         ),
       ),
