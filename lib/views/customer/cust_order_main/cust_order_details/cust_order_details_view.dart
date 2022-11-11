@@ -44,6 +44,7 @@ class _CustomerOrderDetailsPageViewState
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+                // ORDER DETAILS
                 Container(
                     width: double.infinity,
                     decoration: BoxDecoration(
@@ -186,6 +187,8 @@ class _CustomerOrderDetailsPageViewState
                 const SizedBox(
                   height: 15.0,
                 ),
+
+                // SHIPPING DETAILS
                 Container(
                   width: double.infinity,
                   decoration: BoxDecoration(
@@ -318,6 +321,8 @@ class _CustomerOrderDetailsPageViewState
                 const SizedBox(
                   height: 15.0,
                 ),
+
+                // ITEM DETAILS
                 Container(
                     width: double.infinity,
                     decoration: BoxDecoration(
@@ -386,7 +391,7 @@ class _CustomerOrderDetailsPageViewState
                               const Divider(),
                             ]))),
 
-                // FOR OWNER TO ACCEPT ORDER
+                // FOR OWNER TO ACCEPT ORDER - CONFIRM ORDER MODEL
                 widget.role == 'admin'
                     ? Column(
                         children: [
@@ -404,15 +409,17 @@ class _CustomerOrderDetailsPageViewState
                                             BorderRadius.circular(40)),
                                     elevation: 16,
                                     child: Container(
-                                      width: 250.0,
+                                      width: 330.0,
                                       height: 170.0,
                                       decoration: BoxDecoration(
+                                        // border: Border.all(
+                                        //     color: CustomColors.BACKGROUND),
                                         borderRadius:
-                                            BorderRadius.circular(15.0),
-                                        color: CustomColors.BACKGROUND,
+                                            BorderRadius.circular(5.0),
+                                        color: CustomColors.SECONDARY,
                                       ),
                                       child: Padding(
-                                        padding: const EdgeInsets.all(10.0),
+                                        padding: const EdgeInsets.all(20.0),
                                         child: Column(
                                           children: [
                                             Text(
@@ -422,7 +429,7 @@ class _CustomerOrderDetailsPageViewState
                                                   .headline4!
                                                   .copyWith(
                                                     color:
-                                                        CustomColors.SECONDARY,
+                                                        CustomColors.BACKGROUND,
                                                     fontSize: 18.0,
                                                     fontWeight: FontWeight.bold,
                                                   ),
@@ -431,13 +438,13 @@ class _CustomerOrderDetailsPageViewState
                                               height: 24.0,
                                             ),
                                             Text(
-                                              'Would you like to continue?',
+                                              'Do you confirm the order?',
                                               style: Theme.of(context)
                                                   .textTheme
                                                   .headline4!
                                                   .copyWith(
                                                     color:
-                                                        CustomColors.SECONDARY,
+                                                        CustomColors.BACKGROUND,
                                                     fontSize: 18.0,
                                                     fontWeight: FontWeight.bold,
                                                   ),
@@ -595,7 +602,7 @@ class OrderCartItem extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      'Medicine Name',
+                      'Product Name',
                       style: Theme.of(context).textTheme.headline4!.copyWith(
                             color: CustomColors.SECONDARY,
                             fontSize: 16.0,
@@ -646,7 +653,7 @@ class OrderCartItem extends StatelessWidget {
                     width: 20.0,
                   ),
                   Text(
-                    '$productQuantity ML',
+                    '$productQuantity',
                     style: Theme.of(context).textTheme.headline4!.copyWith(
                           color: CustomColors.SECONDARY,
                         ),

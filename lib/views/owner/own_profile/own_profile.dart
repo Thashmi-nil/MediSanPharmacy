@@ -7,6 +7,7 @@ import '../../customer/cust_item_search/all_item_search_provider.dart';
 import '../../customer/cust_order_main/cust_order/cust_order_provider.dart';
 import '../../initials/page_two.dart';
 
+// OWNER PROFILE VIEW
 class AdminProfilePageView extends StatefulWidget {
   const AdminProfilePageView({Key? key}) : super(key: key);
 
@@ -18,6 +19,7 @@ class _AdminProfilePageViewState extends State<AdminProfilePageView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      // TOP BAR
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(90),
         child: Padding(
@@ -51,9 +53,10 @@ class _AdminProfilePageViewState extends State<AdminProfilePageView> {
                   Positioned(
                     child: Container(
                       height: 180.0,
-                      // color: CustomColors.PRIMARY,
                     ),
                   ),
+
+                  // OWNER DETAILS - IMAGE, EMAIL
                   Positioned(
                     child: Center(
                       child: Column(
@@ -86,12 +89,15 @@ class _AdminProfilePageViewState extends State<AdminProfilePageView> {
               ),
             ),
             const Divider(),
+
+            // PROFILE SECTIONS
             SizedBox(
               height: 600.0,
               child: ListView(
                 children: ListTile.divideTiles(
                   context: context,
                   tiles: [
+                    // MY ORDERS PAGE
                     ListTile(
                       onTap: () {
                         Navigator.of(context).push(MaterialPageRoute(
@@ -106,6 +112,8 @@ class _AdminProfilePageViewState extends State<AdminProfilePageView> {
                       ),
                       title: const Text('My Orders'),
                     ),
+
+                    // ALL PRODUCTS PAGE
                     ListTile(
                       onTap: () {
                         Navigator.of(context).push(
@@ -138,6 +146,8 @@ class _AdminProfilePageViewState extends State<AdminProfilePageView> {
                     //   ),
                     //   title: const Text('Feedbacks'),
                     // ),
+
+                    // LOGOUT
                     ListTile(
                       onTap: () {
                         FirebaseAuth.instance.signOut().then(

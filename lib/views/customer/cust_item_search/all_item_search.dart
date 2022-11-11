@@ -10,10 +10,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../utilities/util_card_product.dart';
+import '../../../utilities/util_card_product_all_search.dart';
 import '../cust_product_main/cust_product_details/cust_product_details.dart';
-// import '../cust_products/customer_product_list_page_view.dart';
+import '../cust_product_main/cust_products/customer_product_list_page_view.dart';
+import '../cust_product_main/cust_products/customer_product_list_page_event.dart';
 import '../cust_shopping_cart/cust_shopping_cart_bloc.dart';
-// import '../cust_shopping_cart/shopping_cart_page_event.dart';
+import '../cust_shopping_cart/cust_shopping_cart_event.dart';
 import 'all_item_search_bloc.dart';
 
 class AllItemSearchPageView extends StatefulWidget {
@@ -24,7 +26,7 @@ class AllItemSearchPageView extends StatefulWidget {
   const AllItemSearchPageView({
     this.title = 'ALL',
     this.searchLocation = 'normal',
-    this.productType = 'fragrance',
+    this.productType = 'ALL',
     this.mode = 'customer',
     Key? key,
   }) : super(key: key);
@@ -41,8 +43,12 @@ class _AllItemSearchPageViewState extends State<AllItemSearchPageView> {
         BlocProvider.of<AllItemSearchPageBloc>(context);
     return Scaffold(
       backgroundColor: CustomColors.BACKGROUND,
+
+      // APP BAR
       appBar: widget.searchLocation == 'normal'
-          ? PreferredSize(
+          ?
+          // NORMAL VIEW FROM EACH PRODUCT TYPE
+          PreferredSize(
               preferredSize: const Size.fromHeight(90),
               child: Padding(
                 padding: const EdgeInsets.only(
@@ -50,6 +56,7 @@ class _AllItemSearchPageViewState extends State<AllItemSearchPageView> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
+                    // FOR CUSTOMER
                     widget.mode == 'customer'
                         ? InkWell(
                             onTap: () {
@@ -62,6 +69,8 @@ class _AllItemSearchPageViewState extends State<AllItemSearchPageView> {
                             },
                             child: const Icon(Icons.arrow_back_ios),
                           )
+
+                        // FOR OWNER
                         : InkWell(
                             onTap: () {
                               Navigator.of(context).push(
@@ -78,12 +87,12 @@ class _AllItemSearchPageViewState extends State<AllItemSearchPageView> {
                     ),
                     Expanded(
                       child: TextField(
-                        cursorColor: Colors.pink,
+                        cursorColor: Colors.black,
                         onChanged: (value) {
                           allItemSeBloc.add(SearchItemNameEvent(title: value));
                         },
                         decoration: InputDecoration(
-                            hintText: " Search...",
+                            hintText: " Search Product...",
                             isDense: true,
                             contentPadding:
                                 const EdgeInsets.fromLTRB(20, 20, 0, 0),
@@ -92,7 +101,7 @@ class _AllItemSearchPageViewState extends State<AllItemSearchPageView> {
                             fillColor: Colors.white,
                             border: const OutlineInputBorder(
                               borderRadius: BorderRadius.all(
-                                Radius.circular(20.0),
+                                Radius.circular(5.0),
                               ),
                               borderSide: BorderSide(
                                 color: CustomColors.SECONDARY,
@@ -122,7 +131,9 @@ class _AllItemSearchPageViewState extends State<AllItemSearchPageView> {
                 ),
               ),
             )
-          : PreferredSize(
+          :
+          // ITEM SEARCH MAIN TAB VIEW
+          PreferredSize(
               preferredSize: const Size.fromHeight(90),
               child: Container(
                 color: CustomColors.PRIMARY,
@@ -134,13 +145,13 @@ class _AllItemSearchPageViewState extends State<AllItemSearchPageView> {
                     children: [
                       Expanded(
                         child: TextField(
-                          cursorColor: Colors.pink,
+                          cursorColor: Colors.black,
                           onChanged: (value) {
                             allItemSeBloc
                                 .add(SearchItemNameEvent(title: value));
                           },
                           decoration: InputDecoration(
-                              hintText: " Search...",
+                              hintText: " Search Products...",
                               isDense: true,
                               contentPadding:
                                   const EdgeInsets.fromLTRB(20, 20, 0, 0),
@@ -149,7 +160,7 @@ class _AllItemSearchPageViewState extends State<AllItemSearchPageView> {
                               fillColor: Colors.white,
                               border: const OutlineInputBorder(
                                 borderRadius: BorderRadius.all(
-                                  Radius.circular(20.0),
+                                  Radius.circular(5.0),
                                 ),
                                 borderSide: BorderSide(
                                   color: CustomColors.SECONDARY,
@@ -180,6 +191,7 @@ class _AllItemSearchPageViewState extends State<AllItemSearchPageView> {
                 ),
               ),
             ),
+      // BODY VIEW
       body: BlocBuilder<AllItemSearchPageBloc, AllItemSearchPageState>(
         buildWhen: (previous, current) =>
             previous.isLoading != current.isLoading,
@@ -190,20 +202,21 @@ class _AllItemSearchPageViewState extends State<AllItemSearchPageView> {
             );
           }
           if (state.searchProducts.isEmpty) {
-            return widget.productType == 'Skin Care'
+            return widget.productType == 'labTests'
                 ? ListView.builder(
                     itemCount: state.skinCare.length,
                     itemBuilder: ((context, index) {
                       return Padding(
                         padding: const EdgeInsets.only(
                             bottom: 10.0, left: 20.0, right: 20.0, top: 10.0),
-                        child: CusProductCard(
+                        child: CusProductCardAllSearch(
                           productModel: state.skinCare[index],
                           tapAddItem: () {
                             // bloc.add(cartEvent(
                             //     cartProduct:
-                            //         state.hairCare[index]));
+                            //         state.skinCare[index]));
                           },
+                          // MORE VIEW PAGE
                           tap: () {
                             Navigator.of(context).push(
                               MaterialPageRoute(
@@ -218,9 +231,9 @@ class _AllItemSearchPageViewState extends State<AllItemSearchPageView> {
                       );
                     }),
                   )
-                : widget.productType == 'Hair Care'
+                : widget.productType == 'healthcare'
                     ? ListView.builder(
-                        itemCount: state.hairCare.length,
+                        itemCount: state.fragrance.length,
                         itemBuilder: ((context, index) {
                           return Padding(
                             padding: const EdgeInsets.only(
@@ -228,19 +241,19 @@ class _AllItemSearchPageViewState extends State<AllItemSearchPageView> {
                                 left: 20.0,
                                 right: 20.0,
                                 top: 10.0),
-                            child: CusProductCard(
-                              productModel: state.hairCare[index],
+                            child: CusProductCardAllSearch(
+                              productModel: state.fragrance[index],
                               tapAddItem: () {
                                 // bloc.add(cartEvent(
                                 //     cartProduct:
-                                //         state.hairCare[index]));
+                                //         state.fragrance[index]));
                               },
                               tap: () {
                                 Navigator.of(context).push(
                                   MaterialPageRoute(
                                     builder: ((context) =>
                                         CustomerProductDetailsPageView(
-                                          productModel: state.hairCare[index],
+                                          productModel: state.fragrance[index],
                                         )),
                                   ),
                                 );
@@ -249,9 +262,9 @@ class _AllItemSearchPageViewState extends State<AllItemSearchPageView> {
                           );
                         }),
                       )
-                    : widget.productType == 'fragrance'
+                    : widget.productType == 'medicine'
                         ? ListView.builder(
-                            itemCount: state.fragrance.length,
+                            itemCount: state.colorCosmetics.length,
                             itemBuilder: ((context, index) {
                               return Padding(
                                 padding: const EdgeInsets.only(
@@ -259,12 +272,12 @@ class _AllItemSearchPageViewState extends State<AllItemSearchPageView> {
                                     left: 20.0,
                                     right: 20.0,
                                     top: 10.0),
-                                child: CusProductCard(
-                                  productModel: state.fragrance[index],
+                                child: CusProductCardAllSearch(
+                                  productModel: state.colorCosmetics[index],
                                   tapAddItem: () {
                                     // bloc.add(cartEvent(
                                     //     cartProduct:
-                                    //         state.hairCare[index]));
+                                    //         state.colorCosmetics[index]));
                                   },
                                   tap: () {
                                     Navigator.of(context).push(
@@ -272,7 +285,7 @@ class _AllItemSearchPageViewState extends State<AllItemSearchPageView> {
                                         builder: ((context) =>
                                             CustomerProductDetailsPageView(
                                               productModel:
-                                                  state.fragrance[index],
+                                                  state.colorCosmetics[index],
                                             )),
                                       ),
                                     );
@@ -281,85 +294,53 @@ class _AllItemSearchPageViewState extends State<AllItemSearchPageView> {
                               );
                             }),
                           )
-                        : widget.productType == 'Color cosmetics'
-                            ? ListView.builder(
-                                itemCount: state.colorCosmetics.length,
-                                itemBuilder: ((context, index) {
-                                  return Padding(
-                                    padding: const EdgeInsets.only(
-                                        bottom: 10.0,
-                                        left: 20.0,
-                                        right: 20.0,
-                                        top: 10.0),
-                                    child: CusProductCard(
-                                      productModel: state.colorCosmetics[index],
-                                      tapAddItem: () {
-                                        // bloc.add(cartEvent(
-                                        //     cartProduct:
-                                        //         state.hairCare[index]));
-                                      },
-                                      tap: () {
-                                        Navigator.of(context).push(
-                                          MaterialPageRoute(
-                                            builder: ((context) =>
-                                                CustomerProductDetailsPageView(
-                                                  productModel: state
-                                                      .colorCosmetics[index],
-                                                )),
-                                          ),
-                                        );
-                                      },
-                                    ),
-                                  );
-                                }),
-                              )
-                            : ListView.builder(
-                                itemCount: state.products.length,
-                                itemBuilder: ((context, index) {
-                                  return Padding(
-                                    padding: const EdgeInsets.only(
-                                        bottom: 10.0,
-                                        left: 20.0,
-                                        right: 20.0,
-                                        top: 10.0),
-                                    child: CusProductCard(
-                                      mode: widget.mode,
-                                      productModel: state.products[index],
-                                      tapAddItem: () {
-                                        // bloc.add(cartEvent(
-                                        //     cartProduct:
-                                        //         state.hairCare[index]));
-                                      },
-                                      tap: () {
-                                        Navigator.of(context).push(
-                                          MaterialPageRoute(
-                                            builder: ((context) =>
-                                                CustomerProductDetailsPageView(
-                                                  mode: widget.mode,
-                                                  productModel:
-                                                      state.products[index],
-                                                )),
-                                          ),
-                                        );
-                                      },
-                                    ),
-                                  );
-                                }),
+                        : ListView.builder(
+                            itemCount: state.products.length,
+                            itemBuilder: ((context, index) {
+                              return Padding(
+                                padding: const EdgeInsets.only(
+                                    bottom: 10.0,
+                                    left: 20.0,
+                                    right: 20.0,
+                                    top: 10.0),
+                                child: CusProductCardAllSearch(
+                                  mode: widget.mode,
+                                  productModel: state.products[index],
+                                  tapAddItem: () {
+                                    // bloc.add(cartEvent(
+                                    //     cartProduct:
+                                    //         state.products[index]));
+                                  },
+                                  tap: () {
+                                    Navigator.of(context).push(
+                                      MaterialPageRoute(
+                                        builder: ((context) =>
+                                            CustomerProductDetailsPageView(
+                                              mode: widget.mode,
+                                              productModel:
+                                                  state.products[index],
+                                            )),
+                                      ),
+                                    );
+                                  },
+                                ),
                               );
+                            }),
+                          );
           } else {
-            return widget.productType == 'Skin Care'
+            return widget.productType == 'labTests'
                 ? ListView.builder(
                     itemCount: state.skinCare.length,
                     itemBuilder: ((context, index) {
                       return Padding(
                         padding: const EdgeInsets.only(
                             bottom: 10.0, left: 20.0, right: 20.0, top: 10.0),
-                        child: CusProductCard(
+                        child: CusProductCardAllSearch(
                           productModel: state.skinCare[index],
                           tapAddItem: () {
                             // bloc.add(cartEvent(
                             //     cartProduct:
-                            //         state.hairCare[index]));
+                            //         state.skinCare[index]));
                           },
                           tap: () {
                             Navigator.of(context).push(
@@ -375,9 +356,9 @@ class _AllItemSearchPageViewState extends State<AllItemSearchPageView> {
                       );
                     }),
                   )
-                : widget.productType == 'Hair Care'
+                : widget.productType == 'healthcare'
                     ? ListView.builder(
-                        itemCount: state.hairCare.length,
+                        itemCount: state.fragrance.length,
                         itemBuilder: ((context, index) {
                           return Padding(
                             padding: const EdgeInsets.only(
@@ -385,19 +366,19 @@ class _AllItemSearchPageViewState extends State<AllItemSearchPageView> {
                                 left: 20.0,
                                 right: 20.0,
                                 top: 10.0),
-                            child: CusProductCard(
-                              productModel: state.hairCare[index],
+                            child: CusProductCardAllSearch(
+                              productModel: state.fragrance[index],
                               tapAddItem: () {
                                 // bloc.add(cartEvent(
                                 //     cartProduct:
-                                //         state.hairCare[index]));
+                                //         state.fragrance[index]));
                               },
                               tap: () {
                                 Navigator.of(context).push(
                                   MaterialPageRoute(
                                     builder: ((context) =>
                                         CustomerProductDetailsPageView(
-                                          productModel: state.hairCare[index],
+                                          productModel: state.fragrance[index],
                                         )),
                                   ),
                                 );
@@ -406,9 +387,9 @@ class _AllItemSearchPageViewState extends State<AllItemSearchPageView> {
                           );
                         }),
                       )
-                    : widget.productType == 'fragrance'
+                    : widget.productType == 'medicine'
                         ? ListView.builder(
-                            itemCount: state.fragrance.length,
+                            itemCount: state.colorCosmetics.length,
                             itemBuilder: ((context, index) {
                               return Padding(
                                 padding: const EdgeInsets.only(
@@ -416,12 +397,12 @@ class _AllItemSearchPageViewState extends State<AllItemSearchPageView> {
                                     left: 20.0,
                                     right: 20.0,
                                     top: 10.0),
-                                child: CusProductCard(
-                                  productModel: state.fragrance[index],
+                                child: CusProductCardAllSearch(
+                                  productModel: state.colorCosmetics[index],
                                   tapAddItem: () {
                                     // bloc.add(cartEvent(
                                     //     cartProduct:
-                                    //         state.hairCare[index]));
+                                    //         state.colorCosmetics[index]));
                                   },
                                   tap: () {
                                     Navigator.of(context).push(
@@ -429,7 +410,7 @@ class _AllItemSearchPageViewState extends State<AllItemSearchPageView> {
                                         builder: ((context) =>
                                             CustomerProductDetailsPageView(
                                               productModel:
-                                                  state.fragrance[index],
+                                                  state.colorCosmetics[index],
                                             )),
                                       ),
                                     );
@@ -438,71 +419,38 @@ class _AllItemSearchPageViewState extends State<AllItemSearchPageView> {
                               );
                             }),
                           )
-                        : widget.productType == 'Color cosmetics'
-                            ? ListView.builder(
-                                itemCount: state.colorCosmetics.length,
-                                itemBuilder: ((context, index) {
-                                  return Padding(
-                                    padding: const EdgeInsets.only(
-                                        bottom: 10.0,
-                                        left: 20.0,
-                                        right: 20.0,
-                                        top: 10.0),
-                                    child: CusProductCard(
-                                      productModel: state.colorCosmetics[index],
-                                      tapAddItem: () {
-                                        // bloc.add(cartEvent(
-                                        //     cartProduct:
-                                        //         state.hairCare[index]));
-                                      },
-                                      tap: () {
-                                        Navigator.of(context).push(
-                                          MaterialPageRoute(
-                                            builder: ((context) =>
-                                                CustomerProductDetailsPageView(
-                                                  productModel: state
-                                                      .colorCosmetics[index],
-                                                )),
-                                          ),
-                                        );
-                                      },
-                                    ),
-                                  );
-                                }),
-                              )
-                            : ListView.builder(
-                                itemCount: state.searchProducts.length,
-                                itemBuilder: ((context, index) {
-                                  log('hello');
-                                  return Padding(
-                                    padding: const EdgeInsets.only(
-                                      bottom: 10.0,
-                                      right: 20.0,
-                                      left: 20.0,
-                                      top: 10.0,
-                                    ),
-                                    child: CusProductCard(
-                                      productModel: state.searchProducts[index],
-                                      tapAddItem: () {
-                                        // bloc.add(cartEvent(
-                                        //     cartProduct:
-                                        //         state.hairCare[index]));
-                                      },
-                                      tap: () {
-                                        Navigator.of(context).push(
-                                          MaterialPageRoute(
-                                            builder: ((context) =>
-                                                CustomerProductDetailsPageView(
-                                                  productModel: state
-                                                      .searchProducts[index],
-                                                )),
-                                          ),
-                                        );
-                                      },
-                                    ),
-                                  );
-                                }),
+                        : ListView.builder(
+                            itemCount: state.searchProducts.length,
+                            itemBuilder: ((context, index) {
+                              return Padding(
+                                padding: const EdgeInsets.only(
+                                  bottom: 10.0,
+                                  right: 20.0,
+                                  left: 20.0,
+                                  top: 10.0,
+                                ),
+                                child: CusProductCardAllSearch(
+                                  productModel: state.searchProducts[index],
+                                  tapAddItem: () {
+                                    // bloc.add(cartEvent(
+                                    //     cartProduct:
+                                    //         state.searchProducts[index]));
+                                  },
+                                  tap: () {
+                                    Navigator.of(context).push(
+                                      MaterialPageRoute(
+                                        builder: ((context) =>
+                                            CustomerProductDetailsPageView(
+                                              productModel:
+                                                  state.searchProducts[index],
+                                            )),
+                                      ),
+                                    );
+                                  },
+                                ),
                               );
+                            }),
+                          );
           }
         },
       ),

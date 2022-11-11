@@ -1,11 +1,7 @@
-// import 'package:medisan/views/customer/cust_products/customer_product_list_page_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../styles/color_palette.dart';
 import '../../../utilities/util_carousel_slider.dart';
-// import '../cust_item_search/all_item_search_page_provider.dart';
-// import '../cust_order/customer_order_page_bloc.dart';
-// import '../cust_order/customer_order_page_state.dart';
 
 class PCheckerHomePageView extends StatefulWidget {
   const PCheckerHomePageView({Key? key}) : super(key: key);
@@ -17,8 +13,6 @@ class PCheckerHomePageView extends StatefulWidget {
 class _PCheckerHomePageViewState extends State<PCheckerHomePageView> {
   @override
   Widget build(BuildContext context) {
-    // CustomerOrderPageBloc bloc =
-    //     BlocProvider.of<CustomerOrderPageBloc>(context);
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(

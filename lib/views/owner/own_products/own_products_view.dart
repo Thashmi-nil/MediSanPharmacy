@@ -2,6 +2,7 @@ import 'package:medisan/models/product_model.dart';
 import 'package:medisan/styles/color_palette.dart';
 import 'package:flutter/material.dart';
 
+// PROCUST MORE VIEW
 class AdminProductDetailsPageView extends StatefulWidget {
   final ProductModel productModel;
   const AdminProductDetailsPageView({required this.productModel, Key? key})
@@ -31,10 +32,6 @@ class _AdminProductDetailsPageViewState
                 },
                 child: const Icon(Icons.arrow_back_ios),
               ),
-              // Image.asset(
-              //   'assets/icons/logo_icon.png',
-              // ),
-              // const Text('')
             ],
           ),
         ),
@@ -42,28 +39,13 @@ class _AdminProductDetailsPageViewState
       body: SingleChildScrollView(
         child: Container(
           alignment: Alignment.center,
-          // color: CustomColors.PRIMARY,
-          // decoration: const BoxDecoration(
-          // gradient: LinearGradient(
-          //   begin: Alignment.topCenter,
-          //   end: Alignment.bottomCenter,
-          //   colors: [
-          //     CustomColors.DARKISH,
-          //     CustomColors.PRIMARY,
-          //   ],
-          // ),
-          // ),
           child: Column(
             children: [
+              // PRODUCT IMAGE
               Container(
                 width: double.infinity,
                 height: 260.0,
-                decoration: const BoxDecoration(
-                    borderRadius: BorderRadius.only(
-                        // bottomLeft: Radius.circular(15.0),
-                        // bottomRight: Radius.circular(15.0),
-                        ),
-                    color: CustomColors.BACKGROUND),
+                decoration: const BoxDecoration(color: CustomColors.BACKGROUND),
                 child: Padding(
                   padding: const EdgeInsets.symmetric(
                       horizontal: 40.0, vertical: 20.0),
@@ -78,8 +60,9 @@ class _AdminProductDetailsPageViewState
                   ),
                 ),
               ),
+
+              // PRODUCT DETAILS
               Container(
-                  // width: double.infinity,
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(10.0),
                       color: CustomColors.SURFACE,
@@ -93,6 +76,7 @@ class _AdminProductDetailsPageViewState
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
+                        // PRODUCT NAME
                         Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
@@ -110,6 +94,8 @@ class _AdminProductDetailsPageViewState
                         const SizedBox(
                           height: 20.0,
                         ),
+
+                        // PRODUCT PRICE
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
@@ -120,7 +106,6 @@ class _AdminProductDetailsPageViewState
                                   .headline3!
                                   .copyWith(
                                     color: CustomColors.ONSURFACE,
-                                    // fontSize: 18.0,
                                     fontWeight: FontWeight.w400,
                                   ),
                             ),
@@ -138,6 +123,8 @@ class _AdminProductDetailsPageViewState
                         const SizedBox(
                           height: 30.0,
                         ),
+
+                        // PRODUCT QUANTITY
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
@@ -148,7 +135,6 @@ class _AdminProductDetailsPageViewState
                                   .headline3!
                                   .copyWith(
                                     color: CustomColors.ONSURFACE,
-                                    // fontSize: 18.0,
                                     fontWeight: FontWeight.w400,
                                   ),
                             ),
@@ -166,6 +152,8 @@ class _AdminProductDetailsPageViewState
                         const SizedBox(
                           height: 20.0,
                         ),
+
+                        // ABOUT PRODUCT
                         Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
@@ -176,7 +164,6 @@ class _AdminProductDetailsPageViewState
                                     .headline4!
                                     .copyWith(
                                       color: CustomColors.ONSURFACE,
-                                      // fontSize: 18.0,
                                       fontWeight: FontWeight.w400,
                                     ),
                               ),

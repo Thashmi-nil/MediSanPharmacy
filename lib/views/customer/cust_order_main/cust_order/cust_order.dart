@@ -26,6 +26,8 @@ class _CustomerOrderPageViewState extends State<CustomerOrderPageView> {
         BlocProvider.of<CustomerOrderPageBloc>(context);
     return Scaffold(
         backgroundColor: CustomColors.SCAFFOLD,
+
+        // APPBAR VIEW FROM BOTTOM NAV
         appBar: widget.mode == 'Tabbar'
             ? PreferredSize(
                 preferredSize: const Size.fromHeight(90),
@@ -46,7 +48,10 @@ class _CustomerOrderPageViewState extends State<CustomerOrderPageView> {
                     ),
                   ),
                 ))
-            : PreferredSize(
+            :
+
+            // APPBAR VIEW FROM PROFILE MENUE
+            PreferredSize(
                 preferredSize: const Size.fromHeight(120),
                 child: Padding(
                   padding:
@@ -63,9 +68,6 @@ class _CustomerOrderPageViewState extends State<CustomerOrderPageView> {
                             },
                             child: const Icon(Icons.arrow_back_ios),
                           ),
-                          // Image.asset(
-                          //   'assets/icons/logo_icon.png',
-                          // ),
                           InkWell(
                             onTap: () {
                               Navigator.of(context).push(
@@ -96,96 +98,108 @@ class _CustomerOrderPageViewState extends State<CustomerOrderPageView> {
                   ),
                 ),
               ),
-        body: widget.role == 'admin'
-            ? BlocBuilder<CustomerOrderPageBloc, CustomerOrderPageState>(
-                buildWhen: (previous, current) =>
-                    previous.isLoading != current.isLoading ||
-                    previous.adminOrders != current.adminOrders,
-                builder: (context, state) {
-                  log(state.adminOrders.length.toString());
-                  if (state.isLoading) {
-                    return const Center(
-                      child: CircularProgressIndicator.adaptive(),
-                    );
-                  } else if (state.adminOrders.isEmpty) {
-                    return Center(
-                      child: Center(
-                        child: Text(
-                          'No orders, start to shopping!',
-                          style:
-                              Theme.of(context).textTheme.headline4!.copyWith(
+        body:
+
+            // ORDER VIEW FOR OWNER
+            widget.role == 'admin'
+                ? BlocBuilder<CustomerOrderPageBloc, CustomerOrderPageState>(
+                    buildWhen: (previous, current) =>
+                        previous.isLoading != current.isLoading ||
+                        previous.adminOrders != current.adminOrders,
+                    builder: (context, state) {
+                      log(state.adminOrders.length.toString());
+                      if (state.isLoading) {
+                        return const Center(
+                          child: CircularProgressIndicator.adaptive(),
+                        );
+                      } else if (state.adminOrders.isEmpty) {
+                        return Center(
+                          child: Center(
+                            child: Text(
+                              'No orders, start to shopping!',
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .headline4!
+                                  .copyWith(
                                     color: CustomColors.SECONDARY,
                                   ),
-                        ),
-                      ),
-                    );
-                  }
-                  return ListView.builder(
-                    shrinkWrap: true,
-                    itemCount: state.adminOrders.length,
-                    itemBuilder: (context, index) {
-                      return Padding(
-                        padding: const EdgeInsets.only(
-                          right: 20.0,
-                          left: 20.0,
-                          bottom: 20.0,
-                          top: 10.0,
-                        ),
-                        child: DisplayOrderCard(
-                          orderModel: state.adminOrders[index],
-                          widget: widget,
-                        ),
+                            ),
+                          ),
+                        );
+                      }
+
+                      // RETRUN  ALL ORDER DETAILS FOR PHARMACY
+                      return ListView.builder(
+                        shrinkWrap: true,
+                        itemCount: state.adminOrders.length,
+                        itemBuilder: (context, index) {
+                          return Padding(
+                            padding: const EdgeInsets.only(
+                              right: 20.0,
+                              left: 20.0,
+                              bottom: 20.0,
+                              top: 10.0,
+                            ),
+                            child: DisplayOrderCard(
+                              orderModel: state.adminOrders[index],
+                              widget: widget,
+                            ),
+                          );
+                        },
                       );
                     },
-                  );
-                },
-              )
-            : BlocBuilder<CustomerOrderPageBloc, CustomerOrderPageState>(
-                buildWhen: (previous, current) =>
-                    previous.isLoading != current.isLoading ||
-                    previous.orders != current.orders,
-                builder: (context, state) {
-                  log(state.orders.length.toString());
-                  if (state.isLoading) {
-                    return const Center(
-                      child: CircularProgressIndicator.adaptive(),
-                    );
-                  } else if (state.orders.isEmpty) {
-                    return Center(
-                      child: Center(
-                        child: Text(
-                          'No orders, start to shopping!',
-                          style:
-                              Theme.of(context).textTheme.headline4!.copyWith(
+                  )
+                :
+                // ORDER VIEW FOR CUSTOMER
+                BlocBuilder<CustomerOrderPageBloc, CustomerOrderPageState>(
+                    buildWhen: (previous, current) =>
+                        previous.isLoading != current.isLoading ||
+                        previous.orders != current.orders,
+                    builder: (context, state) {
+                      log(state.orders.length.toString());
+                      if (state.isLoading) {
+                        return const Center(
+                          child: CircularProgressIndicator.adaptive(),
+                        );
+                      } else if (state.orders.isEmpty) {
+                        return Center(
+                          child: Center(
+                            child: Text(
+                              'No orders, start to shopping!',
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .headline4!
+                                  .copyWith(
                                     color: CustomColors.SECONDARY,
                                   ),
-                        ),
-                      ),
-                    );
-                  }
-                  return ListView.builder(
-                    shrinkWrap: true,
-                    itemCount: state.orders.length,
-                    itemBuilder: (context, index) {
-                      return Padding(
-                        padding: const EdgeInsets.only(
-                          right: 20.0,
-                          left: 20.0,
-                          bottom: 20.0,
-                          top: 10.0,
-                        ),
-                        child: DisplayOrderCard(
-                          orderModel: state.orders[index],
-                          widget: widget,
-                        ),
+                            ),
+                          ),
+                        );
+                      }
+                      return ListView.builder(
+                        shrinkWrap: true,
+                        itemCount: state.orders.length,
+                        itemBuilder: (context, index) {
+                          return Padding(
+                            padding: const EdgeInsets.only(
+                              right: 20.0,
+                              left: 20.0,
+                              bottom: 20.0,
+                              top: 10.0,
+                            ),
+                            child: DisplayOrderCard(
+                              orderModel: state.orders[index],
+                              widget: widget,
+                            ),
+                          );
+                        },
                       );
                     },
-                  );
-                },
-              ));
+                  ));
   }
 }
 
+// ORDER DETAIL CARDS
 class DisplayOrderCard extends StatelessWidget {
   final OrderModel orderModel;
   const DisplayOrderCard({
@@ -403,6 +417,7 @@ class DisplayOrderCard extends StatelessWidget {
   }
 }
 
+// ORDER CART ITEMS
 class OrderCartItem extends StatelessWidget {
   final String imageUrl;
   final String name;
@@ -443,6 +458,8 @@ class OrderCartItem extends StatelessWidget {
                           color: CustomColors.ONSURFACE,
                         ),
                   ),
+
+                  // PRODUCT PRICE
                   Row(
                     children: [
                       Text(
@@ -462,6 +479,8 @@ class OrderCartItem extends StatelessWidget {
                       ),
                     ],
                   ),
+
+                  // MULTIPLICATION MARK
                   Row(
                     children: [
                       Text(
@@ -480,6 +499,8 @@ class OrderCartItem extends StatelessWidget {
                   ),
                 ],
               ),
+
+              // TOTAL PRICE
               Text(
                 '${productPrice * count}\$',
                 style: Theme.of(context).textTheme.headline4!.copyWith(

@@ -55,7 +55,7 @@ class SignINPageBloc extends Bloc<SignINPageEvent, SignINPageState> {
               builder: ((context) => const AdminTabBarView()),
             ),
           );
-        } else if (auth.currentUser!.email == 'checker@gmail.com') {
+        } else if (auth.currentUser!.email == 'checkernew@gmail.com') {
           Navigator.of(context).push(
             MaterialPageRoute(
               builder: ((context) => const PCheckerTabBarView()),

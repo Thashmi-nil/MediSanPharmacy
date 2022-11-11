@@ -40,9 +40,6 @@ class _CustomerAddAddressPageViewState
                 },
                 child: const Icon(Icons.arrow_back_ios),
               ),
-              Image.asset(
-                'assets/icons/logo_icon.png',
-              ),
               const Icon(
                 Icons.close,
                 color: CustomColors.SECONDARY,
@@ -78,6 +75,8 @@ class _CustomerAddAddressPageViewState
                   const SizedBox(
                     height: 20.0,
                   ),
+
+                  // ADDRESS DETAILS FORM
                   Form(
                     key: _formKey,
                     child: Column(
@@ -105,9 +104,9 @@ class _CustomerAddAddressPageViewState
                         ),
                         LabelInputFeild(
                           controller: bloc.cityTextEditingController,
-                          hintText: 'City',
-                          validator:
-                              RequiredValidator(errorText: 'City is required'),
+                          hintText: 'Address (City)',
+                          validator: RequiredValidator(
+                              errorText: 'Address (City) is required'),
                         ),
                         const SizedBox(
                           height: 20.0,
@@ -131,12 +130,15 @@ class _CustomerAddAddressPageViewState
           );
         },
       ),
+
+      // BOTTOM NAV DONE BATTON
       bottomNavigationBar: Padding(
         padding: const EdgeInsets.all(20.0),
         child: CustomAlignButton(
           title: 'Done',
           tap: () {
             if (_formKey.currentState!.validate()) {
+              // ADD THE ADDRESS TO THE DB
               bloc.add(
                 AddAddressEvent(
                   addressLineOne:

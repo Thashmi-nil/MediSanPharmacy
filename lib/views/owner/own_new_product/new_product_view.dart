@@ -9,6 +9,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:form_field_validator/form_field_validator.dart';
 import 'new_product_bloc.dart';
 
+// ADD A NEW PRODUCT VIEW
 class AddProductPageView extends StatefulWidget {
   const AddProductPageView({Key? key}) : super(key: key);
 
@@ -18,7 +19,9 @@ class AddProductPageView extends StatefulWidget {
 
 class _AddProductPageViewState extends State<AddProductPageView> {
   var currentSelectedValue;
-  List<String> gender = [
+
+  // PRODUCT TYPES
+  List<String> productType = [
     "medicine",
     "healthcare",
     "labTests",
@@ -52,18 +55,10 @@ class _AddProductPageViewState extends State<AddProductPageView> {
                           bloc.add(UploadImageEvent());
                         },
                         child: Container(
-                          // width: double.infinity,
-                          // height: 160.0,
-                          // decoration: BoxDecoration(
-                          //   borderRadius: BorderRadius.circular(
-                          //     15.0,
-                          //   ),
-                          // border: Border.all(
-                          //     color: CustomColors.SECONDARY, width: 2.0),
-                          // ),
+                          // IMAGE PICKER
                           child: const Center(
                             child: Icon(
-                              Icons.image,
+                              Icons.image_outlined,
                               color: CustomColors.PRIMARY,
                               size: 150.0,
                             ),
@@ -107,6 +102,8 @@ class _AddProductPageViewState extends State<AddProductPageView> {
                       style: Theme.of(context).textTheme.headline4,
                       textAlign: TextAlign.start,
                     ),
+
+                    // PRODUCT TYPES IN THE DROPDOWN LIST
                     BlocBuilder<GetCategoryBloc, GetCategoryState>(
                       builder: (context, state) {
                         return InputDecorator(
@@ -132,6 +129,8 @@ class _AddProductPageViewState extends State<AddProductPageView> {
                               value: currentSelectedValue,
                               isDense: true,
                               isExpanded: true,
+
+                              /// SET THE CHANGED VALUE
                               onChanged: (String? newValue) {
                                 setState(
                                   () {
@@ -142,7 +141,9 @@ class _AddProductPageViewState extends State<AddProductPageView> {
                                   },
                                 );
                               },
-                              items: gender.map((String value) {
+
+                              // SET DROPDOWN VALUES
+                              items: productType.map((String value) {
                                 return DropdownMenuItem<String>(
                                   value: value,
                                   child: Text(value),
@@ -186,6 +187,7 @@ class _AddProductPageViewState extends State<AddProductPageView> {
       ),
     );
     return Scaffold(
+      // NEW ITEM PAGE TOP BAR
       appBar: PreferredSize(
           preferredSize: const Size.fromHeight(90),
           child: Container(
@@ -212,9 +214,12 @@ class _AddProductPageViewState extends State<AddProductPageView> {
           if (state.isLoading) {
             return CustomCircularProgressIndicator(body: body);
           }
+          // RETURN THE FORM
           return body;
         },
       ),
+
+      // BUTTON AT THE FORM'S BOTTOM NAVIGATOR
       bottomNavigationBar: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
           child: BlocBuilder<GetCategoryBloc, GetCategoryState>(
@@ -223,6 +228,7 @@ class _AddProductPageViewState extends State<AddProductPageView> {
                 tap: () {
                   if (_formKey.currentState!.validate()) {
                     bloc.add(
+                      // SET THE FORM VARIABLES WHEN PRESSING THE ADD BUTTON
                       AddNewProductEvent(
                         productType: state.productType,
                         aboutProduct:
@@ -245,6 +251,7 @@ class _AddProductPageViewState extends State<AddProductPageView> {
   }
 }
 
+// INPUT FIELD WIDGET
 class LineInputField extends StatelessWidget {
   final String hintText;
   final int maxLength;

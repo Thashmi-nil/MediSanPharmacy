@@ -17,6 +17,7 @@ import 'own_home_bloc.dart';
 
 import '../own_profile/own_profile_provider.dart';
 
+// OWNER HOME PAGE VIEW
 class AdminHomePageView extends StatefulWidget {
   const AdminHomePageView({Key? key}) : super(key: key);
 
@@ -36,9 +37,6 @@ class _AdminHomePageViewState extends State<AdminHomePageView> {
   ];
   @override
   Widget build(BuildContext context) {
-    // AdminHomePageBloc bloc = BlocProvider.of<AdminHomePageBloc>(context);
-    // CustomerOrderPageBloc cusBloc =
-    //     BlocProvider.of<CustomerOrderPageBloc>(context);
     return Scaffold(
       backgroundColor: CustomColors.SCAFFOLD,
       body: BlocBuilder<AdminHomePageBloc, AdminHomePageState>(
@@ -66,6 +64,8 @@ class _AdminHomePageViewState extends State<AdminHomePageView> {
                             color: CustomColors.PRIMARY,
                           ),
                         ),
+
+                        // MEDISAN LOGO
                         Positioned(
                           top: 40.0,
                           left: 10.0,
@@ -78,80 +78,8 @@ class _AdminHomePageViewState extends State<AdminHomePageView> {
                                     ),
                           ),
                         ),
-                        // Positioned(
-                        //   top: 40.0,
-                        //   right: 10.0,
-                        //   child: Stack(
-                        //     children: [
-                        //       const SizedBox(
-                        //         height: 60.0,
-                        //         width: 50.0,
-                        //       ),
-                        // const Positioned(
-                        //   top: 10.0,
-                        //   child: Icon(
-                        //     Icons.notifications,
-                        //     size: 32.0,
-                        //     color: CustomColors.BACKGROUND,
-                        //   ),
-                        // ),
-                        // Positioned(
-                        //     bottom: 30.0,
-                        //     left: 15.0,
-                        //     child: Container(
-                        //       width: 25.0,
-                        //       height: 25.0,
-                        //       decoration: BoxDecoration(
-                        //         shape: BoxShape.circle,
-                        //         color: CustomColors.BACKGROUND,
-                        //         border: Border.all(
-                        //           color: CustomColors.SECONDARY,
-                        //         ),
-                        //       ),
-                        //       child: Center(
-                        //         child: BlocBuilder<CustomerOrderPageBloc,
-                        //             CustomerOrderPageState>(
-                        //           buildWhen: (previous, current) =>
-                        //               previous.isLoading !=
-                        //                   current.isLoading ||
-                        //               previous.adminNotification !=
-                        //                   current.adminNotification ||
-                        //               previous.adminOrders !=
-                        //                   current.adminOrders,
-                        //           builder: (context, state) {
-                        //             if (state.isLoading) {
-                        //               return const Center();
-                        //             }
-                        //             if (state.adminOrders.isEmpty) {
-                        //               return Text(
-                        //                 '0',
-                        //                 style: Theme.of(context)
-                        //                     .textTheme
-                        //                     .headline4!
-                        //                     .copyWith(
-                        //                       color:
-                        //                           CustomColors.ONSURFACE,
-                        //                       fontWeight: FontWeight.bold,
-                        //                     ),
-                        //               );
-                        //             }
-                        //             return Text(
-                        //               '${state.adminNotification}',
-                        //               style: Theme.of(context)
-                        //                   .textTheme
-                        //                   .headline4!
-                        //                   .copyWith(
-                        //                     color: CustomColors.ONSURFACE,
-                        //                     fontWeight: FontWeight.bold,
-                        //                   ),
-                        //             );
-                        //           },
-                        //         ),
-                        //       ),
-                        //     ))
-                        //     ],
-                        //   ),
-                        // ),
+
+                        // OWENR SEARCH BAR
                         Positioned(
                           bottom: 15,
                           left: 160.0,
@@ -179,8 +107,7 @@ class _AdminHomePageViewState extends State<AdminHomePageView> {
                                     color: Colors.grey.withOpacity(0.5),
                                     spreadRadius: 5,
                                     blurRadius: 7,
-                                    offset: const Offset(
-                                        0, 3), // changes position of shadow
+                                    offset: const Offset(0, 3),
                                   ),
                                 ],
                               ),
@@ -210,10 +137,11 @@ class _AdminHomePageViewState extends State<AdminHomePageView> {
                             ),
                           ),
                         ),
+
+                        // OWNER PROFILE VIEW
                         Positioned(
                             bottom: 25,
                             left: 350.0,
-                            // right: 70.0,
                             child: InkWell(
                                 onTap: () {
                                   Navigator.of(context).push(
@@ -237,6 +165,8 @@ class _AdminHomePageViewState extends State<AdminHomePageView> {
                   const SizedBox(
                     height: 20.0,
                   ),
+
+                  // TOP TAB NAVIGATOR
                   SizedBox(
                     height: 40.0,
                     child: ListView.builder(
@@ -245,11 +175,11 @@ class _AdminHomePageViewState extends State<AdminHomePageView> {
                         itemCount: menuItem.length,
                         itemBuilder: (context, index) {
                           return Padding(
-                            padding: const EdgeInsets.only(left: 20.0),
+                            padding: const EdgeInsets.only(left: 8.0),
                             child: Container(
                               height: 40.0,
                               decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(10.0),
+                                border: Border.all(color: CustomColors.PRIMARY),
                                 color: tappedIndex == index
                                     ? CustomColors.PRIMARY
                                     : CustomColors.BACKGROUND,
@@ -285,7 +215,10 @@ class _AdminHomePageViewState extends State<AdminHomePageView> {
                     height: 20.0,
                   ),
                   tappedIndex == 0
-                      ? Padding(
+                      ?
+
+                      // ALL PRODUCTS TAB
+                      Padding(
                           padding: const EdgeInsets.symmetric(
                             horizontal: 20.0,
                           ),
@@ -322,8 +255,10 @@ class _AdminHomePageViewState extends State<AdminHomePageView> {
                                 },
                               )),
                         )
-                      : tappedIndex == 1
-                          ? Padding(
+                      : tappedIndex == 3
+                          ?
+                          // LAB TESTS PRODUCTS TAB
+                          Padding(
                               padding: const EdgeInsets.symmetric(
                                 horizontal: 20.0,
                               ),
@@ -333,7 +268,7 @@ class _AdminHomePageViewState extends State<AdminHomePageView> {
                                     itemCount: state.skinCare.length,
                                     gridDelegate:
                                         const SliverGridDelegateWithFixedCrossAxisCount(
-                                      crossAxisCount: 2,
+                                      crossAxisCount: 1,
                                       mainAxisExtent: 200,
                                       crossAxisSpacing: 20,
                                       mainAxisSpacing: 20,
@@ -361,17 +296,19 @@ class _AdminHomePageViewState extends State<AdminHomePageView> {
                                   )),
                             )
                           : tappedIndex == 2
-                              ? Padding(
+                              ?
+                              // HEALTHCARE PRODUCTS TAB
+                              Padding(
                                   padding: const EdgeInsets.symmetric(
                                     horizontal: 20.0,
                                   ),
                                   child: SizedBox(
                                       height: 500.0,
                                       child: GridView.builder(
-                                        itemCount: state.hairCare.length,
+                                        itemCount: state.fragrance.length,
                                         gridDelegate:
                                             const SliverGridDelegateWithFixedCrossAxisCount(
-                                          crossAxisCount: 2,
+                                          crossAxisCount: 1,
                                           mainAxisExtent: 200,
                                           crossAxisSpacing: 20,
                                           mainAxisSpacing: 20,
@@ -385,33 +322,36 @@ class _AdminHomePageViewState extends State<AdminHomePageView> {
                                                   builder: ((context) =>
                                                       AdminProductDetailsPageView(
                                                           productModel: state
-                                                              .hairCare[i])),
+                                                              .fragrance[i])),
                                                 ),
                                               );
                                             },
-                                            prodName: state.hairCare[i].name,
+                                            prodName: state.fragrance[i].name,
                                             prodPrice:
-                                                '${state.hairCare[i].productPrice}',
+                                                '${state.fragrance[i].productPrice}',
                                             productQuantity:
-                                                '${state.hairCare[i].productQuantity}',
+                                                '${state.fragrance[i].productQuantity}',
                                             imagePath:
-                                                state.hairCare[i].imageUrl,
+                                                state.fragrance[i].imageUrl,
                                           );
                                         },
                                       )),
                                 )
-                              : tappedIndex == 3
-                                  ? Padding(
+                              : tappedIndex == 1
+                                  ?
+                                  // MEDICINE PRODUCTS TAB
+                                  Padding(
                                       padding: const EdgeInsets.symmetric(
                                         horizontal: 20.0,
                                       ),
                                       child: SizedBox(
                                           height: 500.0,
                                           child: GridView.builder(
-                                            itemCount: state.fragrance.length,
+                                            itemCount:
+                                                state.colorCosmetics.length,
                                             gridDelegate:
                                                 const SliverGridDelegateWithFixedCrossAxisCount(
-                                              crossAxisCount: 2,
+                                              crossAxisCount: 1,
                                               mainAxisExtent: 200,
                                               crossAxisSpacing: 20,
                                               mainAxisSpacing: 20,
@@ -425,70 +365,24 @@ class _AdminHomePageViewState extends State<AdminHomePageView> {
                                                       builder: ((context) =>
                                                           AdminProductDetailsPageView(
                                                               productModel:
-                                                                  state.fragrance[
+                                                                  state.colorCosmetics[
                                                                       i])),
                                                     ),
                                                   );
                                                 },
-                                                prodName:
-                                                    state.fragrance[i].name,
+                                                prodName: state
+                                                    .colorCosmetics[i].name,
                                                 prodPrice:
-                                                    '${state.fragrance[i].productPrice}',
+                                                    '${state.colorCosmetics[i].productPrice}',
                                                 productQuantity:
-                                                    '${state.fragrance[i].productQuantity}',
-                                                imagePath:
-                                                    state.fragrance[i].imageUrl,
+                                                    '${state.colorCosmetics[i].productQuantity}',
+                                                imagePath: state
+                                                    .colorCosmetics[i].imageUrl,
                                               );
                                             },
                                           )),
                                     )
-                                  : tappedIndex == 4
-                                      ? Padding(
-                                          padding: const EdgeInsets.symmetric(
-                                            horizontal: 20.0,
-                                          ),
-                                          child: SizedBox(
-                                              height: 500.0,
-                                              child: GridView.builder(
-                                                itemCount:
-                                                    state.colorCosmetics.length,
-                                                gridDelegate:
-                                                    const SliverGridDelegateWithFixedCrossAxisCount(
-                                                  crossAxisCount: 2,
-                                                  mainAxisExtent: 200,
-                                                  crossAxisSpacing: 20,
-                                                  mainAxisSpacing: 20,
-                                                ),
-                                                itemBuilder:
-                                                    (BuildContext context,
-                                                        int i) {
-                                                  return AdminProductCart(
-                                                    tap: () {
-                                                      Navigator.of(context)
-                                                          .push(
-                                                        MaterialPageRoute(
-                                                          builder: ((context) =>
-                                                              AdminProductDetailsPageView(
-                                                                  productModel:
-                                                                      state.colorCosmetics[
-                                                                          i])),
-                                                        ),
-                                                      );
-                                                    },
-                                                    prodName: state
-                                                        .colorCosmetics[i].name,
-                                                    prodPrice:
-                                                        '${state.colorCosmetics[i].productPrice}',
-                                                    productQuantity:
-                                                        '${state.colorCosmetics[i].productQuantity}',
-                                                    imagePath: state
-                                                        .colorCosmetics[i]
-                                                        .imageUrl,
-                                                  );
-                                                },
-                                              )),
-                                        )
-                                      : const Text(''),
+                                  : const Text(''),
                 ],
               ),
             );
@@ -500,6 +394,7 @@ class _AdminHomePageViewState extends State<AdminHomePageView> {
   }
 }
 
+// PRODUCT CARD IN OWNER HOME
 class AdminProductCart extends StatelessWidget {
   final String prodName;
   final String prodPrice;
@@ -532,7 +427,7 @@ class AdminProductCart extends StatelessWidget {
               color: Colors.grey.withOpacity(0.5),
               spreadRadius: 2,
               blurRadius: 3,
-              offset: const Offset(0, 3), // changes position of shadow
+              offset: const Offset(0, 3),
             ),
           ],
         ),

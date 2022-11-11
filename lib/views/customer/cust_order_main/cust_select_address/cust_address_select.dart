@@ -83,6 +83,8 @@ class _CustomerSelectAddressPageViewState
           }
           return Padding(
             padding: const EdgeInsets.all(20.0),
+
+            // VIEW ALL THE AVAILABLE ADDRESSESS
             child: ListView.builder(
                 itemCount: state.address.length,
                 itemBuilder: ((context, index) {
@@ -92,15 +94,16 @@ class _CustomerSelectAddressPageViewState
                       width: double.infinity,
                       decoration: BoxDecoration(
                         color: CustomColors.BACKGROUND,
-                        borderRadius: BorderRadius.circular(15.0),
+                        borderRadius: BorderRadius.circular(5.0),
                         border: Border.all(
-                          color: CustomColors.SECONDARY,
+                          color: CustomColors.PRIMARY,
                         ),
                       ),
                       child: Padding(
                         padding: const EdgeInsets.all(10.0),
                         child: Column(
                           children: [
+                            // NAME
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
@@ -131,6 +134,7 @@ class _CustomerSelectAddressPageViewState
                             const SizedBox(
                               height: 10.0,
                             ),
+                            // PHONE NUMBER
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
@@ -161,6 +165,7 @@ class _CustomerSelectAddressPageViewState
                             const SizedBox(
                               height: 10.0,
                             ),
+                            // ADDERESS LINE 1
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
@@ -197,6 +202,7 @@ class _CustomerSelectAddressPageViewState
                             const SizedBox(
                               height: 10.0,
                             ),
+                            // ADDRESS LINE TWO
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
@@ -227,6 +233,8 @@ class _CustomerSelectAddressPageViewState
                             const SizedBox(
                               height: 10.0,
                             ),
+
+                            // DELETE ADDRESS MODEL
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
@@ -241,16 +249,16 @@ class _CustomerSelectAddressPageViewState
                                                   BorderRadius.circular(40)),
                                           elevation: 16,
                                           child: Container(
-                                            width: 310.0,
+                                            width: 330.0,
                                             height: 180.0,
                                             decoration: BoxDecoration(
                                               borderRadius:
-                                                  BorderRadius.circular(15.0),
-                                              color: CustomColors.BACKGROUND,
+                                                  BorderRadius.circular(5.0),
+                                              color: CustomColors.SECONDARY,
                                             ),
                                             child: Padding(
                                               padding:
-                                                  const EdgeInsets.all(25.0),
+                                                  const EdgeInsets.all(20.0),
                                               child: Column(
                                                 children: [
                                                   Text(
@@ -260,7 +268,7 @@ class _CustomerSelectAddressPageViewState
                                                         .headline4!
                                                         .copyWith(
                                                           color: CustomColors
-                                                              .SECONDARY,
+                                                              .BACKGROUND,
                                                           fontSize: 18.0,
                                                           fontWeight:
                                                               FontWeight.bold,
@@ -270,13 +278,13 @@ class _CustomerSelectAddressPageViewState
                                                     height: 24.0,
                                                   ),
                                                   Text(
-                                                    'Do you want to delete this address?',
+                                                    'Do you want to delete the address?',
                                                     style: Theme.of(context)
                                                         .textTheme
                                                         .headline4!
                                                         .copyWith(
                                                           color: CustomColors
-                                                              .SECONDARY,
+                                                              .BACKGROUND,
                                                           fontSize: 18.0,
                                                           fontWeight:
                                                               FontWeight.bold,
@@ -290,6 +298,7 @@ class _CustomerSelectAddressPageViewState
                                                         MainAxisAlignment
                                                             .spaceBetween,
                                                     children: [
+                                                      // POP OUT BY CANCEL BUTTON
                                                       PopupModelButton(
                                                         tap: () {
                                                           Navigator.of(context)
@@ -297,10 +306,13 @@ class _CustomerSelectAddressPageViewState
                                                         },
                                                         isDeteled: false,
                                                       ),
+
+                                                      // DELETE CONFIRM BUTTON
                                                       PopupModelButton(
                                                         tap: () async {
                                                           try {
                                                             await FirebaseFirestore
+                                                                // CREATE AN INTANCE OF ADDRESS TABLE
                                                                 .instance
                                                                 .collection(
                                                                     'address')
@@ -308,7 +320,9 @@ class _CustomerSelectAddressPageViewState
                                                                     .address[
                                                                         index]
                                                                     .addressId)
-                                                                .delete();
+                                                                .delete(); // DELETE THE ADDRESS
+
+                                                            // NAVIGATE TOTHE CUSTOMER SELECT ADDRESS PAGE
                                                             Navigator.of(
                                                                     context)
                                                                 .push(
@@ -340,6 +354,7 @@ class _CustomerSelectAddressPageViewState
                                     color: CustomColors.ERROR,
                                   ),
                                 ),
+                                // CONFIRM BUTTON AND MOVE TO PLACE ORDER VIEW
                                 InkWell(
                                   onTap: () {
                                     cusPlaceOrderBloc.add(LastAddAddressEvent(
@@ -359,7 +374,7 @@ class _CustomerSelectAddressPageViewState
                                     width: 120.0,
                                     height: 42.0,
                                     decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(20.0),
+                                      borderRadius: BorderRadius.circular(5.0),
                                       color: CustomColors.PRIMARY,
                                     ),
                                     child: Center(
@@ -388,10 +403,12 @@ class _CustomerSelectAddressPageViewState
           );
         },
       ),
+
+      // ADD ADDRESS BUTTON IN BOTTOM NAV
       bottomNavigationBar: Padding(
-        padding: const EdgeInsets.all(20.0),
+        padding: const EdgeInsets.all(10.0),
         child: CustomAlignButton(
-          title: 'Add Address',
+          title: 'Add Another Address',
           tap: () {
             Navigator.of(context).push(
               MaterialPageRoute(

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../styles/color_palette.dart';
 
+// ORDER CONFIRM BUTTOM WIDGET
 class CustomPopupProceedButton extends StatelessWidget {
   final VoidCallback tap;
   final bool isProceed;
@@ -21,12 +22,12 @@ class CustomPopupProceedButton extends StatelessWidget {
                   width: 120.0,
                   height: 40.0,
                   decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(15.0),
+                    borderRadius: BorderRadius.circular(5.0),
                     color: CustomColors.PRIMARY,
                   ),
                   child: Center(
                     child: Text(
-                      'Proceed',
+                      'Confirm',
                       style: Theme.of(context).textTheme.headline4!.copyWith(
                             color: CustomColors.BACKGROUND,
                             fontSize: 18.0,
@@ -40,9 +41,9 @@ class CustomPopupProceedButton extends StatelessWidget {
                   height: 40.0,
                   decoration: BoxDecoration(
                     border: Border.all(
-                      color: CustomColors.SECONDARY,
+                      color: CustomColors.PRIMARY,
                     ),
-                    borderRadius: BorderRadius.circular(15.0),
+                    borderRadius: BorderRadius.circular(5.0),
                     color: CustomColors.BACKGROUND,
                   ),
                   child: Center(

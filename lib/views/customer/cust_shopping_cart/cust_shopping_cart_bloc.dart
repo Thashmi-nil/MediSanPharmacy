@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'cust_shopping_cart_event.dart';
 import 'cust_shopping_cart_state.dart';
 
+// ADD ALL ITEMS TO THE CART
 class ShoppingCartPageBloc
     extends Bloc<ShoppingCartPageEvent, ShoppingCartPageState> {
   ShoppingCartPageBloc(BuildContext context)

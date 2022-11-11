@@ -1,4 +1,3 @@
-// ignore_for_file: use_build_context_synchronously
 import 'dart:developer';
 import 'dart:io';
 import 'package:medisan/views/owner/own_home/own_topbar.dart';
@@ -68,7 +67,7 @@ class AddProductPageBloc
           context,
           const CustomSnackBar.error(
             backgroundColor: CustomColors.ERROR,
-            message: "Something went wrong.",
+            message: "Something went wrong!",
             textStyle: CustomTextStyles.ERROR_TEXT_STYLE,
           ),
         );

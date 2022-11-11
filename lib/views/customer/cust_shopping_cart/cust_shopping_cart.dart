@@ -27,6 +27,7 @@ class _ShoppingCartPageViewState extends State<ShoppingCartPageView> {
     CustomerProductListPageBloc cplBLoc =
         BlocProvider.of<CustomerProductListPageBloc>(context);
     return Scaffold(
+      // APP BAR OF SHOPPING CART
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(100),
         child: Container(
@@ -60,6 +61,8 @@ class _ShoppingCartPageViewState extends State<ShoppingCartPageView> {
                       Container(
                         width: 40.0,
                       ),
+
+                      // SHOPPING CART ICON
                       const Positioned(
                         top: 30.0,
                         left: 10.0,
@@ -68,6 +71,8 @@ class _ShoppingCartPageViewState extends State<ShoppingCartPageView> {
                           color: CustomColors.BACKGROUND,
                         ),
                       ),
+
+                      // NO OF CART ITEMS
                       BlocBuilder<ShoppingCartPageBloc, ShoppingCartPageState>(
                         buildWhen: (previous, current) =>
                             previous.isLoading != current.isLoading,
@@ -110,6 +115,8 @@ class _ShoppingCartPageViewState extends State<ShoppingCartPageView> {
           ),
         ),
       ),
+
+      // CART VIEW BODY
       body: BlocBuilder<ShoppingCartPageBloc, ShoppingCartPageState>(
         buildWhen: (previous, current) =>
             previous.isLoading != current.isLoading ||
@@ -120,6 +127,8 @@ class _ShoppingCartPageViewState extends State<ShoppingCartPageView> {
               child: CircularProgressIndicator.adaptive(),
             );
           }
+
+          // ALL CART PRODUCTS
           return ListView.builder(
             itemCount: state.selectItem.length,
             itemBuilder: ((context, index) {
@@ -138,6 +147,7 @@ class _ShoppingCartPageViewState extends State<ShoppingCartPageView> {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
+                        // PRODUCT IMAGE
                         Image.network(
                           state.selectItem[index]['product'].imageUrl,
                           width: 80.0,
@@ -147,6 +157,7 @@ class _ShoppingCartPageViewState extends State<ShoppingCartPageView> {
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
+                            // PRODUCT NAME
                             SizedBox(
                               width: 120.0,
                               child: Expanded(
@@ -165,6 +176,8 @@ class _ShoppingCartPageViewState extends State<ShoppingCartPageView> {
                             const SizedBox(
                               height: 5.0,
                             ),
+
+                            // PRODUCT PRICE
                             Row(
                               children: [
                                 Text(
@@ -179,6 +192,8 @@ class _ShoppingCartPageViewState extends State<ShoppingCartPageView> {
                                 const SizedBox(
                                   width: 20.0,
                                 ),
+
+                                // PRODUCT QUANTITY
                                 Text(
                                   '${state.selectItem[index]['product'].productQuantity} ML',
                                   style: Theme.of(context)
@@ -193,6 +208,8 @@ class _ShoppingCartPageViewState extends State<ShoppingCartPageView> {
                             const SizedBox(
                               height: 5.0,
                             ),
+
+                            // PRODUCT COUNT
                             Row(
                               children: [
                                 Text(
@@ -217,6 +234,8 @@ class _ShoppingCartPageViewState extends State<ShoppingCartPageView> {
                             ),
                           ],
                         ),
+
+                        // TOTAL PRICE OF PRODUCTS
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
@@ -244,12 +263,15 @@ class _ShoppingCartPageViewState extends State<ShoppingCartPageView> {
           );
         },
       ),
+
+      // BOTTOM NAV FOR CLEAR CART AND ORDER
       bottomNavigationBar: Padding(
         padding: const EdgeInsets.only(
             left: 20.0, right: 20.0, bottom: 10.0, top: 10.0),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
+            // CLEAR CART BUTTON
             InkWell(
               onTap: () {
                 bloc.add(ClearCartEvent());
@@ -259,9 +281,9 @@ class _ShoppingCartPageViewState extends State<ShoppingCartPageView> {
                 width: 150.0,
                 height: 42.0,
                 decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(15.0),
+                  borderRadius: BorderRadius.circular(5.0),
                   border: Border.all(
-                    color: CustomColors.SECONDARY,
+                    color: CustomColors.PRIMARY,
                   ),
                 ),
                 child: Center(
@@ -277,6 +299,8 @@ class _ShoppingCartPageViewState extends State<ShoppingCartPageView> {
             const SizedBox(
               width: 10.0,
             ),
+
+            // BUY CART BUTTON
             InkWell(
               onTap: () {
                 cusPlaceOrderBloc.add(
@@ -289,25 +313,20 @@ class _ShoppingCartPageViewState extends State<ShoppingCartPageView> {
                     ),
                   ),
                 );
-                // Navigator.of(context).push(
-                //   MaterialPageRoute(
-                //     builder: ((context) => CustomerSelectAddressPageProvider()),
-                //   ),
-                // );
               },
               child: Container(
                 height: 42.0,
                 width: 150.0,
                 decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(15.0),
+                  borderRadius: BorderRadius.circular(5.0),
                   color: CustomColors.PRIMARY,
-                  border: Border.all(
-                    color: CustomColors.SECONDARY,
-                  ),
+                  // border: Border.all(
+                  //   color: CustomColors.SECONDARY,
+                  // ),
                 ),
                 child: Center(
                   child: Text(
-                    'Check Out',
+                    'Buy Cart',
                     style: Theme.of(context).textTheme.headline4!.copyWith(
                           color: CustomColors.BACKGROUND,
                         ),
@@ -322,39 +341,40 @@ class _ShoppingCartPageViewState extends State<ShoppingCartPageView> {
   }
 }
 
-class LineInputField extends StatelessWidget {
-  final String hintText;
-  final int maxLength;
-  final TextEditingController controller;
-  final FieldValidator validator;
-  final String keyBoardType;
+//
+// class LineInputField extends StatelessWidget {
+//   final String hintText;
+//   final int maxLength;
+//   final TextEditingController controller;
+//   final FieldValidator validator;
+//   final String keyBoardType;
 
-  const LineInputField({
-    Key? key,
-    this.keyBoardType = 'text',
-    required this.controller,
-    required this.hintText,
-    required this.maxLength,
-    required this.validator,
-  }) : super(key: key);
+//   const LineInputField({
+//     Key? key,
+//     this.keyBoardType = 'text',
+//     required this.controller,
+//     required this.hintText,
+//     required this.maxLength,
+//     required this.validator,
+//   }) : super(key: key);
 
-  @override
-  Widget build(BuildContext context) {
-    return TextFormField(
-      controller: controller,
-      validator: validator,
-      keyboardType:
-          keyBoardType == 'text' ? TextInputType.text : TextInputType.phone,
-      maxLength: maxLength,
-      cursorColor: CustomColors.ONSURFACE,
-      decoration: InputDecoration(
-        errorStyle: const TextStyle(fontSize: 12),
-        labelText: hintText,
-        labelStyle: Theme.of(context).textTheme.headline3,
-        hintText: '',
-        hintStyle: Theme.of(context).textTheme.headline5,
-        floatingLabelBehavior: FloatingLabelBehavior.always,
-      ),
-    );
-  }
-}
+//   @override
+//   Widget build(BuildContext context) {
+//     return TextFormField(
+//       controller: controller,
+//       validator: validator,
+//       keyboardType:
+//           keyBoardType == 'text' ? TextInputType.text : TextInputType.phone,
+//       maxLength: maxLength,
+//       cursorColor: CustomColors.ONSURFACE,
+//       decoration: InputDecoration(
+//         errorStyle: const TextStyle(fontSize: 12),
+//         labelText: hintText,
+//         labelStyle: Theme.of(context).textTheme.headline3,
+//         hintText: '',
+//         hintStyle: Theme.of(context).textTheme.headline5,
+//         floatingLabelBehavior: FloatingLabelBehavior.always,
+//       ),
+//     );
+//   }
+// }

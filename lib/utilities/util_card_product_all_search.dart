@@ -14,12 +14,13 @@ import '../views/customer/cust_product_main/cust_products/customer_product_list_
 import '../views/customer/cust_product_main/cust_products/customer_product_list_page_event.dart';
 import 'util_update_btn.dart';
 
-class CusProductCard extends StatefulWidget {
+// ALL ITEMS FOR CUSTOMER
+class CusProductCardAllSearch extends StatefulWidget {
   final ProductModel productModel;
   final VoidCallback tap;
   final VoidCallback tapAddItem;
   final String mode;
-  const CusProductCard({
+  const CusProductCardAllSearch({
     required this.tap,
     required this.tapAddItem,
     required this.productModel,
@@ -28,10 +29,11 @@ class CusProductCard extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  State<CusProductCard> createState() => _CusProductCardState();
+  State<CusProductCardAllSearch> createState() =>
+      _CusProductCardAllSearchState();
 }
 
-class _CusProductCardState extends State<CusProductCard> {
+class _CusProductCardAllSearchState extends State<CusProductCardAllSearch> {
   int itemCount = 1;
 
   final _formKey = GlobalKey<FormState>();
@@ -128,40 +130,32 @@ class _CusProductCardState extends State<CusProductCard> {
                         },
                         child: Row(
                           children: [
-                            Image.asset(
-                              'assets/icons/down_btn.png',
-                              height: 30,
-                              width: 30,
-                            ),
-                            const SizedBox(
-                              width: 10.0,
-                            ),
-                            Text(
-                              '$itemCount',
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .headline4!
-                                  .copyWith(
-                                    color: CustomColors.SECONDARY,
-                                  ),
-                            ),
-                            const SizedBox(
-                              width: 10.0,
-                            ),
-                            InkWell(
-                              onTap: () {
-                                setState(() {
-                                  itemCount += 1;
-                                });
-                                bloc.add(
-                                    AddItemCountEvent(itemCount: itemCount));
-                              },
-                              child: Image.asset(
-                                'assets/icons/up_btn.png',
-                                height: 30,
-                                width: 30,
-                              ),
-                            ),
+                            //   Image.asset('assets/icons/dec.png'),
+                            //   const SizedBox(
+                            //     width: 10.0,
+                            //   ),
+                            //   Text(
+                            //     '$itemCount',
+                            //     style: Theme.of(context)
+                            //         .textTheme
+                            //         .headline4!
+                            //         .copyWith(
+                            //           color: CustomColors.SECONDARY,
+                            //         ),
+                            //   ),
+                            //   const SizedBox(
+                            //     width: 10.0,
+                            //   ),
+                            //   InkWell(
+                            //     onTap: () {
+                            //       setState(() {
+                            //         itemCount += 1;
+                            //       });
+                            //       bloc.add(
+                            //           AddItemCountEvent(itemCount: itemCount));
+                            //     },
+                            //     child: Image.asset('assets/icons/inc.png'),
+                            //   ),
                           ],
                         ),
                       )
@@ -188,21 +182,21 @@ class _CusProductCardState extends State<CusProductCard> {
                         child: Container(
                           width: 50.0,
                           height: 40.0,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(10.0),
-                            color: CustomColors.PRIMARY,
-                          ),
-                          child: Center(
-                            child: Text(
-                              'Add',
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .headline4!
-                                  .copyWith(
-                                    color: CustomColors.BACKGROUND,
-                                  ),
-                            ),
-                          ),
+                          // decoration: BoxDecoration(
+                          //   borderRadius: BorderRadius.circular(10.0),
+                          //   color: CustomColors.PRIMARY,
+                          // ),
+                          // child: Center(
+                          //   child: Text(
+                          //     'Add',
+                          //     style: Theme.of(context)
+                          //         .textTheme
+                          //         .headline4!
+                          //         .copyWith(
+                          //           color: CustomColors.BACKGROUND,
+                          //         ),
+                          //   ),
+                          // ),
                         ),
                       )
                     :
@@ -222,7 +216,7 @@ class _CusProductCardState extends State<CusProductCard> {
                                                     BorderRadius.circular(40)),
                                             elevation: 16,
                                             child: Container(
-                                              width: 350.0,
+                                              width: 360.0,
                                               height: 480,
                                               // height: MediaQuery.of(context)
                                               //         .size
@@ -235,7 +229,7 @@ class _CusProductCardState extends State<CusProductCard> {
                                               ),
                                               child: Padding(
                                                 padding:
-                                                    const EdgeInsets.all(10.0),
+                                                    const EdgeInsets.all(20.0),
                                                 child: Column(
                                                   children: [
                                                     Form(
@@ -264,6 +258,8 @@ class _CusProductCardState extends State<CusProductCard> {
                                                                           .bold,
                                                                 ),
                                                           ),
+
+                                                          // PRODUCT NAME
                                                           LineInputField(
                                                             hintText: 'Name',
                                                             maxLength: 50,
@@ -277,6 +273,8 @@ class _CusProductCardState extends State<CusProductCard> {
                                                           const SizedBox(
                                                             height: 10.0,
                                                           ),
+
+                                                          // PRODUCT PRICE
                                                           LineInputField(
                                                             hintText:
                                                                 'Product Price',
@@ -290,6 +288,8 @@ class _CusProductCardState extends State<CusProductCard> {
                                                             controller:
                                                                 priceTextEditingController,
                                                           ),
+
+                                                          // PRODUCT QUANTITY
                                                           LineInputField(
                                                             hintText:
                                                                 'Quantity',
@@ -303,6 +303,8 @@ class _CusProductCardState extends State<CusProductCard> {
                                                             controller:
                                                                 quantityTextEditingController,
                                                           ),
+
+                                                          // ABOUT PRODUCT
                                                           LineInputField(
                                                             hintText:
                                                                 'About Product',
@@ -320,9 +322,12 @@ class _CusProductCardState extends State<CusProductCard> {
                                                     const SizedBox(
                                                       height: 20.0,
                                                     ),
+
+                                                    // UPDATE BUTTON
                                                     Row(
                                                       children: [
                                                         CustomUpdateButton(
+                                                          // POP OUT BY CANCEL
                                                           tap: () {
                                                             Navigator.of(
                                                                     context)
@@ -333,12 +338,15 @@ class _CusProductCardState extends State<CusProductCard> {
                                                         const SizedBox(
                                                           width: 10.0,
                                                         ),
+
+                                                        // CONFIRM UPDATE
                                                         CustomUpdateButton(
                                                           tap: () async {
                                                             if (_formKey
                                                                 .currentState!
                                                                 .validate()) {
                                                               try {
+                                                                // CREATE A INSTANCE OF PRODUCT TABLE
                                                                 var collection =
                                                                     FirebaseFirestore
                                                                         .instance
@@ -361,13 +369,15 @@ class _CusProductCardState extends State<CusProductCard> {
                                                                       "aboutProduct": descriptionTextEditingController
                                                                           .text
                                                                           .trim()
-                                                                    }) // <-- Updated data
+                                                                    }) // UPDATE DATA BY NEW COLLECTION DATA
                                                                     .then((_) =>
                                                                         print(
-                                                                            'Success'))
+                                                                            'Success')) // IF SUCCESS
                                                                     .catchError(
                                                                         (error) =>
-                                                                            print('Failed: $error'));
+                                                                            print('Failed: $error')); // IF FAILED
+
+                                                                // NEVIGATE TO ALL ITEM SEARCH PAGE
                                                                 Navigator.of(
                                                                         context)
                                                                     .push(
@@ -405,119 +415,127 @@ class _CusProductCardState extends State<CusProductCard> {
                                 )),
                           ),
 
-                          // FOR OWNER - DELETE MODEL
-                          // InkWell(
-                          //   onTap: () async {
-                          //     showDialog(
-                          //       context: context,
-                          //       builder: (context) {
-                          //         return Dialog(
-                          //           shape: RoundedRectangleBorder(
-                          //               borderRadius:
-                          //                   BorderRadius.circular(40)),
-                          //           elevation: 16,
-                          //           child: Container(
-                          //             width: 330.0,
-                          //             height: 170.0,
-                          //             decoration: BoxDecoration(
-                          //               borderRadius:
-                          //                   BorderRadius.circular(15.0),
-                          //               color: CustomColors.BACKGROUND,
-                          //             ),
-                          //             child: Padding(
-                          //               padding: const EdgeInsets.all(10.0),
-                          //               child: Column(
-                          //                 children: [
-                          //                   Text(
-                          //                     'Confirm',
-                          //                     style: Theme.of(context)
-                          //                         .textTheme
-                          //                         .headline4!
-                          //                         .copyWith(
-                          //                           color: CustomColors.ERROR,
-                          //                           fontSize: 18.0,
-                          //                           fontWeight: FontWeight.bold,
-                          //                         ),
-                          //                   ),
-                          //                   const SizedBox(
-                          //                     height: 24.0,
-                          //                   ),
-                          //                   Text(
-                          //                     'Do you want to delete this item?',
-                          //                     style: Theme.of(context)
-                          //                         .textTheme
-                          //                         .headline4!
-                          //                         .copyWith(
-                          //                           color:
-                          //                               CustomColors.SECONDARY,
-                          //                           fontSize: 18.0,
-                          //                           fontWeight: FontWeight.bold,
-                          //                         ),
-                          //                   ),
-                          //                   const SizedBox(
-                          //                     height: 10.0,
-                          //                   ),
-                          //                   Row(
-                          //                     mainAxisAlignment:
-                          //                         MainAxisAlignment
-                          //                             .spaceBetween,
-                          //                     children: [
-                          //                       PopupModelButton(
-                          //                           isDeteled: false,
-                          //                           tap: () {
-                          //                             Navigator.of(context)
-                          //                                 .pop();
-                          //                           }),
-                          //                       PopupModelButton(
-                          //                           isDeteled: true,
-                          //                           tap: () async {
-                          //                             try {
-                          //                               final collection =
-                          //                                   FirebaseFirestore
-                          //                                       .instance
-                          //                                       .collection(
-                          //                                           'products');
-                          //                               await collection
-                          //                                   .doc(widget
-                          //                                       .productModel
-                          //                                       .docID)
-                          //                                   .delete()
-                          //                                   .then((_) => print(
-                          //                                       'Deleted'))
-                          //                                   .catchError(
-                          //                                       (error) => print(
-                          //                                           'Delete failed: $error'));
-                          //                               Navigator.of(context)
-                          //                                   .push(
-                          //                                 MaterialPageRoute(
-                          //                                   builder: ((context) =>
-                          //                                       AllItemSearchPageProvider(
-                          //                                         productType:
-                          //                                             "ALL",
-                          //                                         mode: 'admin',
-                          //                                       )),
-                          //                                 ),
-                          //                               );
-                          //                             } catch (e) {
-                          //                               Future.error(
-                          //                                   e.toString());
-                          //                             }
-                          //                           }),
-                          //                     ],
-                          //                   )
-                          //                 ],
-                          //               ),
-                          //             ),
-                          //           ),
-                          //         );
-                          //       },
-                          //     );
-                          //   },
-                          //   child: const Icon(
-                          //     Icons.delete_outline_outlined,
-                          //     color: CustomColors.ERROR,
-                          //   ),
-                          // ),
+                          // DELETE MODEL
+                          InkWell(
+                            onTap: () async {
+                              showDialog(
+                                context: context,
+                                builder: (context) {
+                                  return Dialog(
+                                    shape: RoundedRectangleBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(40)),
+                                    elevation: 16,
+                                    child: Container(
+                                      width: 330.0,
+                                      height: 170.0,
+                                      decoration: BoxDecoration(
+                                        borderRadius:
+                                            BorderRadius.circular(15.0),
+                                        color: CustomColors.SECONDARY,
+                                      ),
+                                      child: Padding(
+                                        padding: const EdgeInsets.all(20.0),
+                                        child: Column(
+                                          children: [
+                                            Text(
+                                              'Confirm',
+                                              style: Theme.of(context)
+                                                  .textTheme
+                                                  .headline4!
+                                                  .copyWith(
+                                                    color:
+                                                        CustomColors.BACKGROUND,
+                                                    fontSize: 18.0,
+                                                    fontWeight: FontWeight.bold,
+                                                  ),
+                                            ),
+                                            const SizedBox(
+                                              height: 24.0,
+                                            ),
+                                            Text(
+                                              'Do you want to delete this item?',
+                                              style: Theme.of(context)
+                                                  .textTheme
+                                                  .headline4!
+                                                  .copyWith(
+                                                    color:
+                                                        CustomColors.BACKGROUND,
+                                                    fontSize: 18.0,
+                                                    fontWeight: FontWeight.bold,
+                                                  ),
+                                            ),
+                                            const SizedBox(
+                                              height: 10.0,
+                                            ),
+                                            Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment
+                                                      .spaceBetween,
+                                              children: [
+                                                // POP OUT BY CANCEL BUTTON
+                                                PopupModelButton(
+                                                    isDeteled: false,
+                                                    tap: () {
+                                                      Navigator.of(context)
+                                                          .pop();
+                                                    }),
+
+                                                // DELETE CONFIRM BUTTON
+                                                PopupModelButton(
+                                                    isDeteled: true,
+                                                    tap: () async {
+                                                      try {
+                                                        // CREATE A INSTANCE OF PRODUCT TABLE
+                                                        final collection =
+                                                            FirebaseFirestore
+                                                                .instance
+                                                                .collection(
+                                                                    'products');
+                                                        // DELETE THE COLLECTION IDENTIFIED BY THE DOCUMENT ID
+                                                        await collection
+                                                            .doc(widget
+                                                                .productModel
+                                                                .docID)
+                                                            .delete()
+                                                            .then((_) => print(
+                                                                'Deleted')) // SUCCESS
+                                                            .catchError(
+                                                                (error) => print(
+                                                                    'Delete failed: $error')); // FAILED
+
+                                                        // NAVIGATE TO ALL ITEM SEARCH PAGE
+                                                        Navigator.of(context)
+                                                            .push(
+                                                          MaterialPageRoute(
+                                                            builder: ((context) =>
+                                                                AllItemSearchPageProvider(
+                                                                  productType:
+                                                                      "ALL",
+                                                                  mode: 'admin',
+                                                                )),
+                                                          ),
+                                                        );
+                                                      } catch (e) {
+                                                        Future.error(
+                                                            e.toString());
+                                                      }
+                                                    }),
+                                              ],
+                                            )
+                                          ],
+                                        ),
+                                      ),
+                                    ),
+                                  );
+                                },
+                              );
+                            },
+                            child: const Icon(
+                              Icons.delete_outline_outlined,
+                              color: CustomColors.ERROR,
+                            ),
+                          ),
                         ],
                       ),
               ],

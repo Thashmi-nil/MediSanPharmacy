@@ -10,6 +10,7 @@ import '../../cust_home/cust_home_topbar.dart';
 import '../../cust_shopping_cart/cust_shopping_cart_bloc.dart';
 import 'cust_place_order_bloc.dart';
 
+// PLACE ORDER VIEW
 class CustomerPlaceOrderPageView extends StatefulWidget {
   const CustomerPlaceOrderPageView({Key? key}) : super(key: key);
 
@@ -42,9 +43,6 @@ class _CustomerPlaceOrderPageViewState
                 },
                 child: const Icon(Icons.arrow_back_ios),
               ),
-              Image.asset(
-                'assets/icons/logo_icon.png',
-              ),
               const Text(''),
             ],
           ),
@@ -60,11 +58,13 @@ class _CustomerPlaceOrderPageViewState
                 height: 60.0,
               ),
               Center(
-                child: Image.asset('assets/images/er_hdr_img.png'),
+                child: Image.asset('assets/images/placeorder.png', height: 320),
               ),
               const SizedBox(
                 height: 20.0,
               ),
+
+              // IF THE STATE IS REGISTERING, DISPLAY PLACE ORDER BUTTON
               BlocBuilder<CustomerPlaceOrderPageBloc,
                   CustomerPlaceOrderPageState>(
                 buildWhen: (previous, current) =>
@@ -78,6 +78,7 @@ class _CustomerPlaceOrderPageViewState
                   }
                   if (state.addName == 'registering') {
                     return InkWell(
+                      // ADD THE ORDER WHEN PRESSING PLACE ORDER BUTTON
                       onTap: () {
                         cusPlaceOrderBloc.add(PlaceOrderEvent());
                       },
@@ -102,26 +103,14 @@ class _CustomerPlaceOrderPageViewState
                       ),
                     );
                   }
-                  return Container(
-                    width: double.infinity,
-                    height: 48.0,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10.0),
-                      color: Colors.green,
-                    ),
-                    child: Center(
-                      child: Text(
-                        'Order added success',
-                        style: Theme.of(context).textTheme.headline4!.copyWith(
-                            color: CustomColors.BACKGROUND, fontSize: 20.0),
-                      ),
-                    ),
-                  );
+                  return Container();
                 },
               ),
               const SizedBox(
                 height: 20.0,
               ),
+
+              // IF THE STATE IS REGISTERED, DISPLAY BACK BUTTON
               BlocBuilder<CustomerPlaceOrderPageBloc,
                   CustomerPlaceOrderPageState>(
                 buildWhen: (previous, current) =>
@@ -129,24 +118,28 @@ class _CustomerPlaceOrderPageViewState
                 builder: (context, state) {
                   if (state.addName == 'registered') {
                     return CustomNextButton(
-                      backgound: const Color(0xFFFF9DC1),
+                      backgound: CustomColors.SECONDARY,
                       btextColor: CustomColors.BACKGROUND,
                       tap: () {
-                        cusPlaceOrderBloc.add(InitEvent());
-                        shoppingCartBloc.add(ClearCartEvent());
+                        cusPlaceOrderBloc.add(InitEvent()); // STATE CHANGE
+                        shoppingCartBloc
+                            .add(ClearCartEvent()); // CLEARE THE CART
                         Navigator.of(context).push(
                           MaterialPageRoute(
-                            builder: ((context) => const CustomerTabBarView()),
+                            builder: ((context) =>
+                                const CustomerTabBarView()), // MOVE TO CUSTOMER TAB BAR VIEW
                           ),
                         );
                       },
-                      btnName: 'Start shopping again',
+                      btnName: 'Back',
                     );
                   }
                   return const Text('');
                 },
               ),
               const SizedBox(height: 20.0),
+
+              // IF THE STATE IS REGISTERED, DISPLAY EXIT BUTTON
               BlocBuilder<CustomerPlaceOrderPageBloc,
                   CustomerPlaceOrderPageState>(
                 buildWhen: (previous, current) =>

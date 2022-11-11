@@ -42,11 +42,11 @@ class AllItemSearchPageBloc
         }
 
         for (var c in products) {
-          if (c.productType == 'color cosmetics') {
+          if (c.productType == 'medicine') {
             colorCosmetics.add(c);
-          } else if (c.productType == 'fragrance') {
+          } else if (c.productType == 'healthcare') {
             fragrance.add(c);
-          } else if (c.productType == 'skin care') {
+          } else if (c.productType == 'labTests') {
             skinCare.add(c);
           } else if (c.productType == 'hair care') {
             hairCare.add(c);
@@ -90,11 +90,11 @@ class AllItemSearchPageBloc
       }
 
       for (var c in products) {
-        if (c.productType == 'color cosmetics') {
+        if (c.productType == 'medicine') {
           colorCosmetics.add(c);
-        } else if (c.productType == 'fragrance') {
+        } else if (c.productType == 'healthcare') {
           fragrance.add(c);
-        } else if (c.productType == 'skin care') {
+        } else if (c.productType == 'labTests') {
           skinCare.add(c);
         } else if (c.productType == 'hair care') {
           hairCare.add(c);

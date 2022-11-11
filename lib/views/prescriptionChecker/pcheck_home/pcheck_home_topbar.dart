@@ -19,13 +19,6 @@ class _PCheckerTabBarViewState extends State<PCheckerTabBarView> {
   int _currentIndex = 0;
   final List<Widget> _children = [
     PCheckerHomePageProvider(),
-    // AllItemSearchPageProvider(
-    //   searchLocation: 'tabbar',
-    //   productType: 'ALL',
-    // ),
-    // CustomerOrderPageProvider(
-    //   role: 'customer',
-    // ),
     PCheckerProfilePageProvider(),
   ];
 
@@ -37,10 +30,7 @@ class _PCheckerTabBarViewState extends State<PCheckerTabBarView> {
 
   @override
   Widget build(BuildContext context) {
-    // CustomerOrderPageBloc cusBloc =
-    //     BlocProvider.of<CustomerOrderPageBloc>(context);
     return Scaffold(
-      // body: _children[_currentIndex],
       bottomNavigationBar: SizedBox(
         height: 70.0,
         child: BottomNavigationBar(
@@ -67,12 +57,6 @@ class _PCheckerTabBarViewState extends State<PCheckerTabBarView> {
               ),
               label: 'New order',
             ),
-            // BottomNavigationBarItem(
-            //   icon: Icon(
-            //     Icons.shopping_bag_outlined,
-            //   ),
-            //   label: 'My Orders',
-            // ),
             BottomNavigationBarItem(
               icon: Icon(
                 Icons.account_circle_outlined,

@@ -22,6 +22,7 @@ import '../../../../utilities/util_card_product.dart';
 import 'customer_product_list_page_bloc.dart';
 import 'customer_product_list_page_state.dart';
 
+// EACH PRODUCT CARD ITEM LIST VIEW WITH CART OPTIONS
 class CustomerProductListPageView extends StatefulWidget {
   final String title;
   const CustomerProductListPageView({required this.title, Key? key})
@@ -36,12 +37,15 @@ class _CustomerProductListPageViewState
     extends State<CustomerProductListPageView> {
   @override
   Widget build(BuildContext context) {
+    // BUILD A SHOPPING CART BLOCK
     ShoppingCartPageBloc shoppingCartPagebloc =
         BlocProvider.of<ShoppingCartPageBloc>(context);
     CustomerProductListPageBloc bloc =
         BlocProvider.of<CustomerProductListPageBloc>(context);
     return Scaffold(
       backgroundColor: CustomColors.SCAFFOLD,
+
+      // APP BAR
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(90),
         child: Padding(
@@ -68,6 +72,8 @@ class _CustomerProductListPageViewState
                   'assets/icons/medisanLogo.png',
                 ),
               ),
+
+              // SHOPPING CART ICON
               InkWell(
                 onTap: () {
                   Navigator.of(context).push(
@@ -99,6 +105,8 @@ class _CustomerProductListPageViewState
                         if (state.isLoading) {
                           return const Center();
                         }
+
+                        // NO OF CART ITEMS
                         return Positioned(
                           top: 5.0,
                           right: 20.0,
@@ -148,6 +156,7 @@ class _CustomerProductListPageViewState
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
+                  // CARD TITLE HERE
                   Text(
                     widget.title,
                     style: Theme.of(context).textTheme.headline2!.copyWith(
@@ -159,6 +168,8 @@ class _CustomerProductListPageViewState
                   const SizedBox(
                     height: 20.0,
                   ),
+
+                  // SEARCH BAR FOR ALL ITEM SERACH PAGE
                   InkWell(
                     onTap: () {
                       Navigator.of(context).push(
@@ -180,8 +191,7 @@ class _CustomerProductListPageViewState
                             color: Colors.grey.withOpacity(0.5),
                             spreadRadius: 5,
                             blurRadius: 7,
-                            offset: const Offset(
-                                0, 3), // changes position of shadow
+                            offset: const Offset(0, 3),
                           ),
                         ],
                       ),
@@ -221,9 +231,12 @@ class _CustomerProductListPageViewState
                               itemBuilder: ((context, index) {
                                 return Padding(
                                   padding: const EdgeInsets.only(bottom: 10.0),
+
+                                  // CARD WHICH CONTAINS INCREMENT DECREMENT COUNT AND ADD BUTTON
                                   child: CusProductCard(
                                     productModel: state.products[index],
                                     tapAddItem: () {
+                                      // Generate a v4 (random) id
                                       var uuid = const Uuid();
                                       var itemWithQuantity = {
                                         "id": uuid.v4(),
@@ -236,6 +249,8 @@ class _CustomerProductListPageViewState
                                       bloc.add(cartEvent(
                                           cartProduct: itemWithQuantity));
                                     },
+
+                                    // PRODUCT MORE VIEW
                                     tap: () {
                                       Navigator.of(context).push(
                                         MaterialPageRoute(
@@ -258,6 +273,8 @@ class _CustomerProductListPageViewState
                                     return Padding(
                                       padding:
                                           const EdgeInsets.only(bottom: 10.0),
+
+                                      // CARD WHICH CONTAINS INCREMENT DECREMENT COUNT AND ADD BUTTON
                                       child: CusProductCard(
                                         productModel:
                                             state.colorCosmetics[index],
@@ -265,7 +282,8 @@ class _CustomerProductListPageViewState
                                           var uuid = const Uuid();
                                           var itemWithQuantity = {
                                             "id": uuid.v4(),
-                                            "product": state.products[index],
+                                            "product":
+                                                state.colorCosmetics[index],
                                             "count": state.itemCount
                                           };
                                           log(itemWithQuantity.toString());
@@ -275,6 +293,7 @@ class _CustomerProductListPageViewState
                                           bloc.add(cartEvent(
                                               cartProduct: itemWithQuantity));
                                         },
+                                        // PRODUCT MORE VIEW
                                         tap: () {
                                           Navigator.of(context).push(
                                             MaterialPageRoute(
@@ -297,6 +316,8 @@ class _CustomerProductListPageViewState
                                         return Padding(
                                           padding: const EdgeInsets.only(
                                               bottom: 10.0),
+
+                                          // CARD WHICH CONTAINS INCREMENT DECREMENT COUNT AND ADD BUTTON
                                           child: CusProductCard(
                                             productModel:
                                                 state.fragrance[index],
@@ -305,7 +326,7 @@ class _CustomerProductListPageViewState
                                               var itemWithQuantity = {
                                                 "id": uuid.v4(),
                                                 "product":
-                                                    state.products[index],
+                                                    state.fragrance[index],
                                                 "count": state.itemCount
                                               };
                                               log(itemWithQuantity.toString());
@@ -317,6 +338,7 @@ class _CustomerProductListPageViewState
                                                   cartProduct:
                                                       itemWithQuantity));
                                             },
+                                            // PRODUCT MORE VIEW
                                             tap: () {
                                               Navigator.of(context).push(
                                                 MaterialPageRoute(
@@ -338,6 +360,8 @@ class _CustomerProductListPageViewState
                                         return Padding(
                                           padding: const EdgeInsets.only(
                                               bottom: 10.0),
+
+                                          // CARD WHICH CONTAINS INCREMENT DECREMENT COUNT AND ADD BUTTON
                                           child: CusProductCard(
                                             productModel: state.skinCare[index],
                                             tapAddItem: () {
@@ -345,7 +369,7 @@ class _CustomerProductListPageViewState
                                               var itemWithQuantity = {
                                                 "id": uuid.v4(),
                                                 "product":
-                                                    state.products[index],
+                                                    state.skinCare[index],
                                                 "count": state.itemCount
                                               };
                                               log(itemWithQuantity.toString());
@@ -357,6 +381,7 @@ class _CustomerProductListPageViewState
                                                   cartProduct:
                                                       itemWithQuantity));
                                             },
+                                            // PRODUCT MORE VIEW
                                             tap: () {
                                               Navigator.of(context).push(
                                                 MaterialPageRoute(
@@ -371,50 +396,7 @@ class _CustomerProductListPageViewState
                                           ),
                                         );
                                       }),
-                                    )
-                      // : ListView.builder(
-                      //     itemCount: state.hairCare.length,
-                      //     itemBuilder: ((context, index) {
-                      //       return Padding(
-                      //         padding: const EdgeInsets.only(
-                      //             bottom: 10.0),
-                      //         child: CusProductCard(
-                      //           productModel:
-                      //               state.hairCare[index],
-                      //           tapAddItem: () {
-                      //             var uuid = const Uuid();
-                      //             var itemWithQuantity = {
-                      //               "id": uuid.v4(),
-                      //               "product":
-                      //                   state.products[index],
-                      //               "count": state.itemCount
-                      //             };
-                      //             log(itemWithQuantity
-                      //                 .toString());
-                      //             shoppingCartPagebloc.add(
-                      //                 AddToCartEvent(
-                      //                     cartItems:
-                      //                         itemWithQuantity));
-                      //             bloc.add(cartEvent(
-                      //                 cartProduct:
-                      //                     itemWithQuantity));
-                      //           },
-                      //           tap: () {
-                      //             Navigator.of(context).push(
-                      //               MaterialPageRoute(
-                      //                 builder: ((context) =>
-                      //                     CustomerProductDetailsPageView(
-                      //                       productModel: state
-                      //                           .hairCare[index],
-                      //                     )),
-                      //               ),
-                      //             );
-                      //           },
-                      //         ),
-                      //       );
-                      //     }),
-                      // ),
-                      )
+                                    ))
                 ],
               ),
             ),

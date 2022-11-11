@@ -7,6 +7,7 @@ import '../own_new_product/new_product_provider.dart';
 import '../own_profile/own_profile_provider.dart';
 import 'own_home_provider.dart';
 
+// OWNER BOTTOM NAVIGATOR
 class AdminTabBarView extends StatefulWidget {
   const AdminTabBarView({Key? key}) : super(key: key);
 
@@ -61,7 +62,7 @@ class _AdminTabBarViewState extends State<AdminTabBarView> {
               icon: Icon(
                 Icons.add_to_photos_outlined,
               ),
-              label: 'Items',
+              label: 'New Item',
             ),
             BottomNavigationBarItem(
               icon: Icon(

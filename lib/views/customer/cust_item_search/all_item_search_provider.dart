@@ -1,4 +1,5 @@
 // WORKED AS THE DEPENDANCY INJECTION TO SEARCH ITEMS FROM THE DATABASE
+// LOAD THE ALL PRODUCTS VIEW
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

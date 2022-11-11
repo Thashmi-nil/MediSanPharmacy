@@ -31,26 +31,13 @@ class AdminHomePageBloc extends Bloc<AdminHomePageEvent, AdminHomePageState> {
               aboutProduct: snapshot.data()['aboutProduct']);
           products.add(model);
         }
-        // var data =
-        //     await FirebaseFirestore.instance.collection("products").get();
-        // for (int i = 0; i < data.docs.length; i++) {
-        //   ProductModel model = ProductModel(
-        //       userId: data.docs[i].data()['userID'],
-        //       productId: data.docs[i].data()['productID'],
-        //       name: data.docs[i].data()['name'],
-        //       productPrice: data.docs[i].data()['productPrice'],
-        //       productQuantity: data.docs[i].data()['productQuantity'],
-        //       productType: data.docs[i].data()['productType'],
-        //       imageUrl: data.docs[i].data()['imageUrl'],
-        //       aboutProduct: data.docs[i].data()['aboutProduct']);
-        //   products.add(model);
-        // }
+
         for (var c in products) {
-          if (c.productType == 'color cosmetics') {
+          if (c.productType == 'medicine') {
             colorCosmetics.add(c);
-          } else if (c.productType == 'fragrance') {
+          } else if (c.productType == 'healthcare') {
             fragrance.add(c);
-          } else if (c.productType == 'skin care') {
+          } else if (c.productType == 'labTests') {
             skinCare.add(c);
           } else if (c.productType == 'hair care') {
             hairCare.add(c);

@@ -44,7 +44,7 @@ class MyApp extends StatelessWidget {
             title: 'medisan',
             theme: CustomThemes.lightTheme(context),
             home: snapshot.hasData
-                ? snapshot.data == 'admin@gmail.com'
+                ? snapshot.data == 'adminowner@gmail.com'
                     ? const AdminTabBarView()
                     : const CustomerTabBarView()
                 : const PageOne(),
