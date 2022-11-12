@@ -55,7 +55,8 @@ class MyApp extends StatelessWidget {
   }
 
   Future<String?> getLoggedUser() async {
-    FirebaseAuth auth = FirebaseAuth.instance;
+    FirebaseAuth auth = FirebaseAuth
+        .instance; //To create a new Firebase Auth instance, call the instance getter on FirebaseAuth
     return auth.currentUser!.email;
   }
 }

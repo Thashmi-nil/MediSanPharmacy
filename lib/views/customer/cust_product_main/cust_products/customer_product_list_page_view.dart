@@ -170,56 +170,56 @@ class _CustomerProductListPageViewState
                   ),
 
                   // SEARCH BAR FOR ALL ITEM SERACH PAGE
-                  InkWell(
-                    onTap: () {
-                      Navigator.of(context).push(
-                        MaterialPageRoute(
-                          builder: ((context) => AllItemSearchPageProvider(
-                                productType: widget.title,
-                              )),
-                        ),
-                      );
-                    },
-                    child: Container(
-                      width: 400,
-                      height: 42.0,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10.0),
-                        color: CustomColors.BACKGROUND,
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.grey.withOpacity(0.5),
-                            spreadRadius: 5,
-                            blurRadius: 7,
-                            offset: const Offset(0, 3),
-                          ),
-                        ],
-                      ),
-                      child: Padding(
-                        padding: const EdgeInsets.only(left: 20.0),
-                        child: Row(
-                          children: [
-                            const Icon(
-                              Icons.search,
-                              color: CustomColors.SECONDARY,
-                            ),
-                            const SizedBox(
-                              width: 10.0,
-                            ),
-                            Text(
-                              ' Search here',
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .headline4!
-                                  .copyWith(
-                                    color: CustomColors.SECONDARY,
-                                  ),
-                            )
-                          ],
-                        ),
-                      ),
-                    ),
-                  ),
+                  // InkWell(
+                  //   onTap: () {
+                  //     Navigator.of(context).push(
+                  //       MaterialPageRoute(
+                  //         builder: ((context) => AllItemSearchPageProvider(
+                  //               productType: widget.title,
+                  //             )),
+                  //       ),
+                  //     );
+                  //   },
+                  //   child: Container(
+                  //     width: 400,
+                  //     height: 42.0,
+                  //     decoration: BoxDecoration(
+                  //       borderRadius: BorderRadius.circular(10.0),
+                  //       color: CustomColors.BACKGROUND,
+                  //       boxShadow: [
+                  //         BoxShadow(
+                  //           color: Colors.grey.withOpacity(0.5),
+                  //           spreadRadius: 5,
+                  //           blurRadius: 7,
+                  //           offset: const Offset(0, 3),
+                  //         ),
+                  //       ],
+                  //     ),
+                  //     child: Padding(
+                  //       padding: const EdgeInsets.only(left: 20.0),
+                  //       child: Row(
+                  //         children: [
+                  //           const Icon(
+                  //             Icons.search,
+                  //             color: CustomColors.SECONDARY,
+                  //           ),
+                  //           const SizedBox(
+                  //             width: 10.0,
+                  //           ),
+                  //           Text(
+                  //             ' Search here',
+                  //             style: Theme.of(context)
+                  //                 .textTheme
+                  //                 .headline4!
+                  //                 .copyWith(
+                  //                   color: CustomColors.SECONDARY,
+                  //                 ),
+                  //           )
+                  //         ],
+                  //       ),
+                  //     ),
+                  //   ),
+                  // ),
                   const SizedBox(
                     height: 20.0,
                   ),

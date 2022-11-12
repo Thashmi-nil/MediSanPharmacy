@@ -1,5 +1,8 @@
 // METHOD OF ADDING ADDRESS TO THE FIRESTORE DATABASE
-
+import 'package:top_snackbar_flutter/custom_snack_bar.dart';
+import 'package:top_snackbar_flutter/top_snack_bar.dart';
+import '../../../styles/color_palette.dart';
+import '../../../styles/fonts.dart';
 import 'package:medisan/views/customer/cust_order_main/cust_select_address/cust_address_select_provider.dart';
 import 'package:bloc/bloc.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -43,6 +46,14 @@ class CustomerAddAddressPageBloc
         );
       } catch (e) {
         emit(state.clone(isLoading: false));
+        showTopSnackBar(
+          context,
+          const CustomSnackBar.error(
+            backgroundColor: CustomColors.ERROR,
+            message: "Something went wrong!",
+            textStyle: CustomTextStyles.ERROR_TEXT_STYLE,
+          ),
+        );
         return Future.error(e.toString());
       }
     });

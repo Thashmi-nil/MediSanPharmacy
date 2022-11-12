@@ -1,7 +1,7 @@
 import 'package:medisan/views/initials/page_two.dart';
 import 'package:medisan/views/signin_signup/signin_page/signin_page_event.dart';
 import 'package:medisan/views/signin_signup/signin_page/signin_page_state.dart';
-import 'package:medisan/views/signin_signup/signup_page/signup_page_provider.dart';
+// import 'package:medisan/views/signin_signup/signup_page/signup_page_provider.dart';
 import 'package:medisan/utilities/util_circ_progress.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

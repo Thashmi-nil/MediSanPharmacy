@@ -25,7 +25,8 @@ class SignupPageBloc extends Bloc<SignupPageEvent, SignupPageState> {
       FirebaseFirestore firestore = FirebaseFirestore.instance;
       FirebaseAuth auth = FirebaseAuth.instance;
       try {
-        emit(state.clone(isLoading: true));
+        emit(state.clone(
+            isLoading: true)); //  when we want a new state for your bloc
         User? user = (await auth.createUserWithEmailAndPassword(
                 email: event.email, password: event.password))
             .user;
